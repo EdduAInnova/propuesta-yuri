@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Vanguard | AgileCMCons</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- LOADING SCREEN -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="text-center">
+            <div class="loader mx-auto mb-4"></div>
+            <p class="text-gray-400">Cargando visión corporativa...</p>
+        </div>
+    </div>
+    
+    <!-- SPOTLIGHT EFFECT -->
+    <div class="spotlight"></div>
+    
+    <!-- PARTÍCULAS DE FONDO -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- NAVEGACIÓN -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-ultra">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold">
+                Eddu<span class="gradient-text">AInnova</span>
+            </div>
+            <a href="index.html" class="text-sm text-gray-400 hover:text-white transition flex items-center gap-2">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+        </div>
+    </nav>
+    
+    <!-- CONTENIDO PRINCIPAL -->
+    <section class="min-h-screen pt-32 pb-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Info -->
+                <div class="animate-fade-in-left">
+                    <div class="inline-block px-4 py-2 bg-blue-500/20 text-blue-400 rounded-full text-sm font-bold mb-6">
+                        OPCIÓN 1
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-6xl font-black mb-6">
+                        Corporate<br>
+                        <span class="gradient-text">Vanguard</span>
+                    </h1>
+                    
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                        El equilibrio perfecto entre la <span class="text-cyan-400 font-bold">seriedad bancaria</span> y la <span class="text-cyan-400 font-bold">frescura tecnológica</span>.
+                    </p>
+                    
+                    <div class="space-y-6 mb-12">
+                        <div class="glass-ultra p-6 rounded-2xl">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-palette text-cyan-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-2">Diseño Minimalista Suizo</h4>
+                                    <p class="text-sm text-gray-400">Fondo blanco inmaculado, tipografías <span class="tech-term" data-tip="Tipografía sin remates, moderna y limpia, ideal para lectura en pantallas">Sans Serif</span> limpias, eliminación de sombras antiguas.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-ultra p-6 rounded-2xl">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-mouse-pointer text-cyan-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-2"><span class="tech-term" data-tip="Pequeñas animaciones que responden a acciones del usuario (como al pasar el mouse)">Micro-interacciones</span> Premium</h4>
+                                    <p class="text-sm text-gray-400">Las tarjetas se elevan suavemente al hover, cambios de color sutiles.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-ultra p-6 rounded-2xl">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-building text-cyan-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-2">Ideal para Banca y Gobierno</h4>
+                                    <p class="text-sm text-gray-400">Transmite confianza, solidez y profesionalismo institucional.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="openContactModal('Corporate Vanguard')" class="btn-premium w-full py-5 rounded-full font-bold text-lg">
+                        <i class="fas fa-rocket mr-2"></i>
+                        Quiero Esta Visión
+                    </button>
+                </div>
+                
+                <!-- Mockup 3D -->
+                <div class="mockup-3d animate-fade-in-right">
+                    <div class="mockup-screen glass-ultra rounded-3xl overflow-hidden">
+                        <!-- Browser Chrome -->
+                        <div class="bg-slate-800 px-4 py-3 flex items-center gap-2 border-b border-white/10">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <div class="flex-1 bg-slate-700 rounded px-3 py-1 text-xs text-gray-400 ml-4">
+                                agilecmcons.com
+                            </div>
+                        </div>
+                        
+                        <!-- Content -->
+                        <div class="bg-white h-[600px] overflow-hidden relative group">
+                            <div class="mockup-content p-8">
+                                <!-- Mini Nav -->
+                                <div class="mini-nav">
+                                    <div class="text-slate-800 font-bold text-xs">CORPORATE</div>
+                                    <div class="mini-links">
+                                        <div class="mini-link bg-slate-600"></div>
+                                        <div class="mini-link bg-slate-600"></div>
+                                        <div class="mini-link bg-slate-600"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Mini Hero -->
+                                <div class="mini-hero">
+                                    <div class="text-2xl font-black text-slate-900 mb-2">Professional Services</div>
+                                    <div class="text-xs text-slate-600 mb-4 max-w-xs">Elegancia y confianza en cada detalle</div>
+                                    <div class="mini-btn bg-blue-600 flex items-center justify-center">
+                                        <span class="text-white text-xs font-bold">Consultar</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Mini Grid -->
+                                <div class="mini-grid">
+                                    <div class="mini-card light">
+                                        <div class="mini-card-icon bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
+                                            <i class="fas fa-briefcase text-white text-xs"></i>
+                                        </div>
+                                        <div class="text-slate-800 text-xs font-bold mb-1">Profesional</div>
+                                        <div class="text-slate-600 text-[10px]">Imagen sólida</div>
+                                    </div>
+                                    <div class="mini-card light">
+                                        <div class="mini-card-icon bg-gradient-to-br from-indigo-500 to-indigo-700 flex items-center justify-center">
+                                            <i class="fas fa-chart-bar text-white text-xs"></i>
+                                        </div>
+                                        <div class="text-slate-800 text-xs font-bold mb-1">Datos</div>
+                                        <div class="text-slate-600 text-[10px]">Información clara</div>
+                                    </div>
+                                    <div class="mini-card light">
+                                        <div class="mini-card-icon bg-gradient-to-br from-slate-500 to-slate-700 flex items-center justify-center">
+                                            <i class="fas fa-award text-white text-xs"></i>
+                                        </div>
+                                        <div class="text-slate-800 text-xs font-bold mb-1">Calidad</div>
+                                        <div class="text-slate-600 text-[10px]">Excelencia</div>
+                                    </div>
+                                    <div class="mini-card light">
+                                        <div class="mini-card-icon bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
+                                            <i class="fas fa-handshake text-white text-xs"></i>
+                                        </div>
+                                        <div class="text-slate-800 text-xs font-bold mb-1">Confianza</div>
+                                        <div class="text-slate-600 text-[10px]">Transparencia</div>
+                                    </div>
+                                    <div class="mini-card light">
+                                        <div class="mini-card-icon bg-gradient-to-br from-indigo-500 to-indigo-700 flex items-center justify-center">
+                                            <i class="fas fa-building text-white text-xs"></i>
+                                        </div>
+                                        <div class="text-slate-800 text-xs font-bold mb-1">Empresarial</div>
+                                        <div class="text-slate-600 text-[10px]">B2B Ready</div>
+                                    </div>
+                                    <div class="mini-card light">
+                                        <div class="mini-card-icon bg-gradient-to-br from-slate-500 to-slate-700 flex items-center justify-center">
+                                            <i class="fas fa-check-circle text-white text-xs"></i>
+                                        </div>
+                                        <div class="text-slate-800 text-xs font-bold mb-1">Garantía</div>
+                                        <div class="text-slate-600 text-[10px]">100% seguro</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- MODAL DE CONTACTO -->
+    <div id="contactModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] hidden items-center justify-center p-6">
+        <div class="glass-ultra max-w-md w-full rounded-3xl p-8 relative">
+            <button onclick="closeContactModal()" class="absolute top-6 right-6 w-10 h-10 rounded-full glass-ultra flex items-center justify-center hover:bg-white/10 transition">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <h3 class="text-3xl font-black mb-2">¡Excelente Elección!</h3>
+            <p class="text-gray-400 mb-8">Agendemos una sesión para ultimar detalles.</p>
+            
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-4">
+                <input type="hidden" name="plan" id="selectedPlan">
+                
+                <div>
+                    <label class="block text-sm font-bold mb-2">Plan Seleccionado</label>
+                    <input type="text" id="planDisplay" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 text-cyan-400 font-bold" readonly>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" name="nombre" placeholder="Nombre" required class="bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                    <input type="text" name="empresa" placeholder="Empresa" class="bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                </div>
+                
+                <input type="email" name="email" placeholder="Email" required class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                
+                <input type="tel" name="telefono" placeholder="Teléfono (opcional)" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                
+                <textarea name="mensaje" placeholder="Mensaje adicional (opcional)" rows="3" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition resize-none"></textarea>
+                
+                <button type="submit" class="btn-premium w-full py-4 rounded-xl font-bold text-lg">
+                    <i class="fas fa-paper-plane mr-2"></i>
+                    Enviar Solicitud
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="https://www.facebook.com/Edduainnova" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/edduainnova/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/EdduAInnova" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="https://github.com/EdduAInnova" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+            </div>
+            <p class="text-gray-500 text-sm">
+                Copyright © 2025 EdduAInnova
+            </p>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP WIDGET -->
+    <div class="whatsapp-widget">
+        <a href="https://wa.me/573166569719?text=Quiero%20hacer%20una%20consulta%20sobre%20desarrollo%20y%20dise%C3%B1o%20web%20para%20mi%20sitio%20%F0%9F%9A%80%F0%9F%92%BB" target="_blank" class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Custom Scripts -->
+    <script src="js/script.js"></script>
+</body>
+</html>

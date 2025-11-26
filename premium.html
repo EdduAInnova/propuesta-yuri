@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Expertise | AgileCMCons</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- LOADING SCREEN -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="text-center">
+            <div class="loader mx-auto mb-4"></div>
+            <p class="text-gray-400">Cargando exclusividad...</p>
+        </div>
+    </div>
+    
+    <!-- SPOTLIGHT EFFECT -->
+    <div class="spotlight"></div>
+    
+    <!-- PARTÍCULAS DE FONDO -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- NAVEGACIÓN -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-ultra">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold">
+                Eddu<span class="gradient-text">AInnova</span>
+            </div>
+            <a href="index.html" class="text-sm text-gray-400 hover:text-white transition flex items-center gap-2">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+        </div>
+    </nav>
+    
+    <!-- CONTENIDO PRINCIPAL -->
+    <section class="min-h-screen pt-32 pb-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Info -->
+                <div class="animate-fade-in-left">
+                    <div class="inline-block px-4 py-2 bg-pink-500/20 text-pink-400 rounded-full text-sm font-bold mb-6">
+                        OPCIÓN 3
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-6xl font-black mb-6">
+                        Premium<br>
+                        <span class="gradient-text">Expertise</span>
+                    </h1>
+                    
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                        <span class="text-pink-400 font-bold">Menos es más</span>. Diseño tipo editorial de alta gama. Autoridad minimalista.
+                    </p>
+                    
+                    <div class="space-y-6 mb-12">
+                        <div class="glass-ultra p-6 rounded-2xl">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-pink-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-camera text-pink-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-2">Fotografía de Alta Calidad</h4>
+                                    <p class="text-sm text-gray-400">Personas reales, entornos de negocios modernos, mucho espacio negativo.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-ultra p-6 rounded-2xl">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-pink-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-video text-pink-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-2"><span class="tech-term" data-tip="Video de alta calidad que ocupa toda la pantalla inicial para máximo impacto">Video Hero Background</span></h4>
+                                    <p class="text-sm text-gray-400">Video HD de fondo mostrando equipos colaborando, con filtro de color corporativo.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-ultra p-6 rounded-2xl">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-pink-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-crown text-pink-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-2">Posicionamiento Exclusivo</h4>
+                                    <p class="text-sm text-gray-400">La consultora más exclusiva y costosa del mercado (<span class="tech-term" data-tip="Servicios de alto valor y precio premium">High-Ticket</span>).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="openContactModal('Premium Expertise')" class="btn-premium w-full py-5 rounded-full font-bold text-lg">
+                        <i class="fas fa-crown mr-2"></i>
+                        Quiero Esta Visión
+                    </button>
+                </div>
+                
+                <!-- Mockup 3D -->
+                <div class="mockup-3d animate-fade-in-right">
+                    <div class="mockup-screen glass-ultra rounded-3xl overflow-hidden">
+                        <!-- Browser Chrome -->
+                        <div class="bg-slate-800 px-4 py-3 flex items-center gap-2 border-b border-white/10">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <div class="flex-1 bg-slate-700 rounded px-3 py-1 text-xs text-gray-400 ml-4">
+                                agilecmcons.com
+                            </div>
+                        </div>
+                        
+                        <!-- Content -->
+                        <div class="bg-gradient-to-br from-gray-900 via-slate-800 to-black h-[600px] overflow-hidden relative group">
+                            <div class="mockup-content p-8 relative z-10">
+                                <!-- Mini Nav -->
+                                <div class="mini-nav">
+                                    <div class="text-white font-bold text-xs">PREMIUM</div>
+                                    <div class="mini-links">
+                                        <div class="mini-link bg-white/60"></div>
+                                        <div class="mini-link bg-white/60"></div>
+                                        <div class="mini-link bg-white/60"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Mini Hero -->
+                                <div class="mini-hero">
+                                    <div class="text-2xl font-black text-white mb-2">Elite Consulting</div>
+                                    <div class="text-xs text-gray-400 mb-4 max-w-xs">Transformamos tu visión en realidad digital</div>
+                                    <div class="mini-btn bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                                        <span class="text-white text-xs font-bold">Contactar</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Mini Grid -->
+                                <div class="mini-grid">
+                                    <div class="mini-card dark">
+                                        <div class="mini-card-icon bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                                            <i class="fas fa-crown text-white text-xs"></i>
+                                        </div>
+                                        <div class="text-white text-xs font-bold mb-1">Premium</div>
+                                        <div class="text-gray-400 text-[10px]">Diseño exclusivo</div>
+                                    </div>
+                                    <div class="mini-card dark">
+                                        <div class="mini-card-icon bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                                            <i class="fas fa-rocket text-white text-xs"></i>
+                                        </div>
+                                        <div class="text-white text-xs font-bold mb-1">Rápido</div>
+                                        <div class="text-gray-400 text-[10px]">Optimizado</div>
+                                    </div>
+                                    <div class="mini-card dark">
+                                        <div class="mini-card-icon bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center">
+                                            <i class="fas fa-shield text-white text-xs"></i>
+                                        </div>
+                                        <div class="text-white text-xs font-bold mb-1">Seguro</div>
+                                        <div class="text-gray-400 text-[10px]">Protección total</div>
+                                    </div>
+                                    <div class="mini-card dark">
+                                        <div class="mini-card-icon bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                                            <i class="fas fa-chart-line text-white text-xs"></i>
+                                        </div>
+                                        <div class="text-white text-xs font-bold mb-1">Analytics</div>
+                                        <div class="text-gray-400 text-[10px]">Datos en tiempo real</div>
+                                    </div>
+                                    <div class="mini-card dark">
+                                        <div class="mini-card-icon bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
+                                            <i class="fas fa-users text-white text-xs"></i>
+                                        </div>
+                                        <div class="text-white text-xs font-bold mb-1">Equipo</div>
+                                        <div class="text-gray-400 text-[10px]">Soporte 24/7</div>
+                                    </div>
+                                    <div class="mini-card dark">
+                                        <div class="mini-card-icon bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center">
+                                            <i class="fas fa-cog text-white text-xs"></i>
+                                        </div>
+                                        <div class="text-white text-xs font-bold mb-1">Custom</div>
+                                        <div class="text-gray-400 text-[10px]">A tu medida</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- AI AGENT WIDGET -->
+                            <div class="mini-ai-widget">
+                                <div class="mini-chat-header">
+                                    <div class="mini-chat-avatar bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
+                                        <i class="fas fa-robot text-white text-[10px]"></i>
+                                    </div>
+                                    <div class="text-xs font-bold text-white">Asistente IA</div>
+                                </div>
+                                <div class="mini-chat-body">
+                                    <div class="mini-msg">
+                                        👋 ¡Hola! Veo que te interesa nuestro plan Premium.
+                                    </div>
+                                    <div class="mini-msg">
+                                        ¿Te gustaría agendar una demo personalizada?
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- MODAL DE CONTACTO -->
+    <div id="contactModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] hidden items-center justify-center p-6">
+        <div class="glass-ultra max-w-md w-full rounded-3xl p-8 relative">
+            <button onclick="closeContactModal()" class="absolute top-6 right-6 w-10 h-10 rounded-full glass-ultra flex items-center justify-center hover:bg-white/10 transition">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <h3 class="text-3xl font-black mb-2">¡Excelente Elección!</h3>
+            <p class="text-gray-400 mb-8">Agendemos una sesión para ultimar detalles.</p>
+            
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-4">
+                <input type="hidden" name="plan" id="selectedPlan">
+                
+                <div>
+                    <label class="block text-sm font-bold mb-2">Plan Seleccionado</label>
+                    <input type="text" id="planDisplay" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 text-cyan-400 font-bold" readonly>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" name="nombre" placeholder="Nombre" required class="bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                    <input type="text" name="empresa" placeholder="Empresa" class="bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                </div>
+                
+                <input type="email" name="email" placeholder="Email" required class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                
+                <input type="tel" name="telefono" placeholder="Teléfono (opcional)" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                
+                <textarea name="mensaje" placeholder="Mensaje adicional (opcional)" rows="3" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition resize-none"></textarea>
+                
+                <button type="submit" class="btn-premium w-full py-4 rounded-xl font-bold text-lg">
+                    <i class="fas fa-paper-plane mr-2"></i>
+                    Enviar Solicitud
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="https://www.facebook.com/Edduainnova" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/edduainnova/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/EdduAInnova" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="https://github.com/EdduAInnova" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+            </div>
+            <p class="text-gray-500 text-sm">
+                Copyright © 2025 EdduAInnova
+            </p>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP WIDGET -->
+    <div class="whatsapp-widget">
+        <a href="https://wa.me/573166569719?text=Quiero%20hacer%20una%20consulta%20sobre%20desarrollo%20y%20dise%C3%B1o%20web%20para%20mi%20sitio%20%F0%9F%9A%80%F0%9F%92%BB" target="_blank" class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Custom Scripts -->
+    <script src="js/script.js"></script>
+</body>
+</html>
