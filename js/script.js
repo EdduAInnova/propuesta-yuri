@@ -23,13 +23,23 @@ if (document.readyState === 'complete') {
 // Safety fallback: Force hide after 2 seconds no matter what
 setTimeout(hideLoader, 2000);
 
+// ===== UTILS =====
+const isMobile = () => window.innerWidth < 768;
+
 // ===== SPOTLIGHT EFFECT =====
 const spotlight = document.querySelector('.spotlight');
 if (spotlight) {
-    window.addEventListener('mousemove', e => {
-        spotlight.style.setProperty('--x', `${e.clientX}px`);
-        spotlight.style.setProperty('--y', `${e.clientY}px`);
-    });
+    // Only enable spotlight on non-mobile devices to save battery/performance
+    if (!isMobile()) {
+        window.addEventListener('mousemove', e => {
+            requestAnimationFrame(() => {
+                spotlight.style.setProperty('--x', `${e.clientX}px`);
+                spotlight.style.setProperty('--y', `${e.clientY}px`);
+            });
+        });
+    } else {
+        spotlight.style.display = 'none';
+    }
 }
 
 // ===== PARTICLES =====
@@ -37,7 +47,10 @@ function createParticles() {
     const container = document.getElementById('particles');
     if (!container) return;
     
-    for (let i = 0; i < 50; i++) {
+    // Reduce particles on mobile for better performance
+    const particleCount = isMobile() ? 20 : 50;
+    
+    for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
         particle.style.left = Math.random() * 100 + '%';

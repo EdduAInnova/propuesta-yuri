@@ -1,0 +1,11 @@
+{
+  "name": "propuesta-yuri",
+  "version": "1.0.0",
+  "description": "Propuesta Estratégica AgileCMCons",
+  "scripts": {
+    "dev": "npx serve . -l 7501"
+  },
+  "keywords": [],
+  "author": "EdduAInnova",
+  "license": "ISC"
+}

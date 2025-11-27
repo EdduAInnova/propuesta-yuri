@@ -17,7 +17,6 @@ body {
     background: var(--darker);
     color: white;
     overflow-x: hidden;
-    overflow-x: hidden;
 }
 
 /* SPOTLIGHT EFFECT */
@@ -272,6 +271,21 @@ body:hover .spotlight {
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .spotlight { display: none; }
+    
+    /* Reduce blur for performance */
+    .glass-ultra {
+        backdrop-filter: blur(10px) saturate(180%);
+    }
+    
+    /* Adjust 3D mockup for mobile */
+    .mockup-screen {
+        transform: none !important; /* Disable 3D rotation on mobile */
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+    
+    .mockup-3d:hover .mockup-screen {
+        transform: none !important;
+    }
 }
 
 /* SCROLL INDICATOR */
@@ -413,6 +427,7 @@ body:hover .spotlight {
 .tech-card:hover {
     border-color: var(--primary);
     background: linear-gradient(180deg, rgba(14, 165, 233, 0.1) 0%, rgba(255,255,255,0.01) 100%);
+}
 
 /* =========================================
    BEAUTIFUL ANIMATED MOCKUPS
