@@ -199,86 +199,301 @@
         </div>
     </section>
     
-    <!-- MODAL DE CONTACTO -->
-    <div id="contactModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] hidden items-center justify-center p-4 md:p-6">
-        <div class="glass-ultra max-w-md w-full rounded-3xl p-6 md:p-8 relative">
-            <button onclick="closeContactModal()" class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 rounded-full glass-ultra flex items-center justify-center hover:bg-white/10 transition">
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- Flatpickr Spanish locale -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+    
+    <!-- MODAL DE AGENDAMIENTO -->
+    <div id="contactModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-ultra max-w-3xl w-full rounded-3xl p-6 md:p-8 relative my-8">
+            <button onclick="closeContactModal()" class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 rounded-full glass-ultra flex items-center justify-center hover:bg-white/10 transition z-10">
                 <i class="fas fa-times"></i>
             </button>
             
-            <h3 class="text-2xl md:text-3xl font-black mb-2">¡Excelente Elección!</h3>
-            <p class="text-gray-400 mb-8">Agendemos una sesión para ultimar detalles.</p>
+            <h3 class="text-2xl md:text-3xl font-black mb-2">Agenda tu Reunión</h3>
+            <p class="text-gray-400 mb-6">Elige la fecha y hora que mejor te convenga</p>
             
-            <form id="contactForm" class="space-y-4">
+            <form id="contactForm" class="space-y-5">
                 <input type="hidden" name="plan" id="selectedPlan">
+                <input type="hidden" name="fecha" id="selectedDate">
+                <input type="hidden" name="hora" id="selectedTime">
+                <input type="hidden" name="tipo" id="selectedMeetingType">
                 
+                <!-- Plan seleccionado -->
                 <div>
-                    <label class="block text-sm font-bold mb-2">Plan Seleccionado</label>
-                    <input type="text" id="planDisplay" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 text-cyan-400 font-bold" readonly>
+                    <label class="block text-sm font-bold mb-2 text-cyan-400">Plan Seleccionado</label>
+                    <input type="text" id="planDisplay" class="w-full bg-slate-800/50 border border-cyan-500/30 rounded-xl px-4 py-3 text-cyan-300 font-bold" readonly>
+                </div>
+                
+                <!-- Información personal -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Nombre Completo *</label>
+                        <input type="text" name="nombre" required class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Email *</label>
+                        <input type="email" name="email" required class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                    </div>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" name="nombre" placeholder="Nombre" required class="bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
-                    <input type="text" name="empresa" placeholder="Empresa" class="bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                    <div>
+                        <label class="block text-sm font-bold mb-2">WhatsApp *</label>
+                        <input type="tel" name="telefono" required placeholder="+57 300 123 4567" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Empresa</label>
+                        <input type="text" name="empresa" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                    </div>
                 </div>
                 
-                <input type="email" name="email" placeholder="Email" required class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                <!-- Calendario y horarios -->
+                <div>
+                    <label class="block text-sm font-bold mb-2">
+                        <i class="fas fa-calendar-alt text-cyan-400 mr-2"></i>
+                        Selecciona Fecha y Hora *
+                    </label>
+                    <input type="text" id="datePicker" placeholder="Selecciona una fecha" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition cursor-pointer" required readonly>
+                </div>
                 
-                <input type="tel" name="telefono" placeholder="Teléfono (opcional)" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                <!-- Time slots -->
+                <div id="timeSlots" class="hidden">
+                    <label class="block text-sm font-bold mb-3">Horarios Disponibles (Hora de Bogotá)</label>
+                    <div id="timeSlotsGrid" class="grid grid-cols-3 sm:grid-cols-4 gap-2"></div>
+                </div>
                 
-                <textarea name="mensaje" placeholder="Mensaje adicional (opcional)" rows="3" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition resize-none"></textarea>
+                <!-- Tipo de reunión -->
+                <div>
+                    <label class="block text-sm font-bold mb-3">
+                        <i class="fas fa-video text-cyan-400 mr-2"></i>
+                        Tipo de Reunión *
+                    </label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="tipoReunion" value="llamada" required class="hidden peer">
+                            <div class="border-2 border-white/10 peer-checked:border-cyan-500 peer-checked:bg-cyan-500/10 rounded-xl p-4 text-center transition">
+                                <i class="fas fa-phone text-3xl mb-2"></i>
+                                <p class="font-bold">Llamada</p>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="tipoReunion" value="videollamada" required class="hidden peer">
+                            <div class="border-2 border-white/10 peer-checked:border-cyan-500 peer-checked:bg-cyan-500/10 rounded-xl p-4 text-center transition">
+                                <i class="fas fa-video text-3xl mb-2"></i>
+                                <p class="font-bold">Videollamada</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
                 
-                <button type="submit" class="btn-premium w-full py-4 rounded-xl font-bold text-lg">
-                    <i class="fas fa-paper-plane mr-2"></i>
-                    Enviar Solicitud
+                <!-- Mensaje opcional -->
+                <div>
+                    <label class="block text-sm font-bold mb-2">Mensaje Adicional</label>
+                    <textarea name="mensaje" rows="3" placeholder="¿Algo específico que quieras discutir?" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition resize-none"></textarea>
+                </div>
+                
+                <!-- Términos y condiciones -->
+                <div class="space-y-3 bg-slate-900/50 p-4 rounded-xl">
+                    <label class="flex items-start gap-3 cursor-pointer group">
+                        <input type="checkbox" required class="mt-1 w-5 h-5 rounded border-2 border-white/20 checked:bg-cyan-500 checked:border-cyan-500 transition">
+                        <span class="text-sm text-gray-300 group-hover:text-white transition">
+                            He leído y acepto la <a href="#" class="text-cyan-400 hover:underline">Política de Privacidad</a> y el tratamiento de mis datos personales
+                        </span>
+                    </label>
+                    
+                    <label class="flex items-start gap-3 cursor-pointer group">
+                        <input type="checkbox" required class="mt-1 w-5 h-5 rounded border-2 border-white/20 checked:bg-cyan-500 checked:border-cyan-500 transition">
+                        <span class="text-sm text-gray-300 group-hover:text-white transition">
+                            Acepto los <a href="#" class="text-cyan-400 hover:underline">Términos y Condiciones</a> del servicio
+                        </span>
+                    </label>
+                </div>
+                
+                <button type="submit" id="submitBtn" disabled class="btn-premium w-full py-4 rounded-xl font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed transition">
+                    <i class="fas fa-calendar-check mr-2"></i>
+                    Agendar Reunión
                 </button>
             </form>
-            
-            <script>
-            // Handle form submission with Formspree + CallMeBot WhatsApp
-            document.getElementById('contactForm').addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                const formData = new FormData(this);
-                const data = Object.fromEntries(formData);
-                
-                // 1. Send to Formspree
-                try {
-                    await fetch('https://formspree.io/f/xqavawbb', {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-                    
-                    // 2. Send WhatsApp notification via CallMeBot
-                    const whatsappMessage = `🔔 Nueva Solicitud de Propuesta\n\n` +
-                        `Plan: ${data.plan}\n` +
-                        `Nombre: ${data.nombre}\n` +
-                        `Empresa: ${data.empresa || 'No especificada'}\n` +
-                        `Email: ${data.email}\n` +
-                        `Teléfono: ${data.telefono || 'No especificado'}\n` +
-                        `Mensaje: ${data.mensaje || 'Sin mensaje'}`;
-                    
-                    const encodedMessage = encodeURIComponent(whatsappMessage);
-                    const whatsappURL = `https://api.callmebot.com/whatsapp.php?phone=573185462265&text=${encodedMessage}&apikey=9482148`;
-                    
-                    // Send to CallMeBot (using image pixel trick to avoid CORS)
-                    const img = new Image();
-                    img.src = whatsappURL;
-                    
-                    // Show success message and redirect
-                    window.location.href = 'confirmacion.html';
-                    
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert('Hubo un error al enviar. Por favor intenta nuevamente.');
-                }
-            });
-            </script>
         </div>
     </div>
+    
+    <script>
+    // Initialize Flat picker
+    let selectedDateValue = null;
+    let picker = null;
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Configure Flatpickr
+        const now = new Date();
+        const minDate = new Date(now.getTime() + 6 * 60 * 60 * 1000); // 6 hours from now
+        
+        picker = flatpickr("#datePicker", {
+            locale: "es",
+            minDate: minDate,
+            dateFormat: "Y-m-d",
+            disable: [
+                function(date) {
+                    // Disable Sundays (0) and Colombian holidays
+                    return date.getDay() === 0;
+                }
+            ],
+            onChange: function(selectedDates, dateStr) {
+                if (selectedDates.length > 0) {
+                    selectedDateValue = dateStr;
+                    document.getElementById('selectedDate').value = dateStr;
+                    generateTimeSlots(selectedDates[0]);
+                }
+            }
+        });
+        
+        // Handle meeting type selection
+        document.querySelectorAll('input[name="tipoReunion"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.getElementById('selectedMeetingType').value = this.value;
+                validateForm();
+            });
+        });
+        
+        // Validate form on any change
+        document.getElementById('contactForm').addEventListener('change', validateForm);
+        document.getElementById('contactForm').addEventListener('input', validateForm);
+    });
+    
+    function generateTimeSlots(selectedDate) {
+        const timeSlotsDiv = document.getElementById('timeSlots');
+        const gridDiv = document.getElementById('timeSlotsGrid');
+        gridDiv.innerHTML = '';
+        
+        const now = new Date();
+        const isToday = selectedDate.toDateString() === now.toDateString();
+        const minHoursFromNow = 6;
+        
+        // Generate time slots from 8 AM to 8 PM (12-hour format)
+        const slots = [];
+        for (let hour = 8; hour <= 20; hour++) {
+            for (let minute = 0; minute < 60; minute += 30) {
+                const slotDate = new Date(selectedDate);
+                slotDate.setHours(hour, minute, 0, 0);
+                
+                // Skip if it's today and slot is less than 6 hours from now
+                if (isToday) {
+                    const hoursFromNow = (slotDate - now) / (1000 * 60 * 60);
+                    if (hoursFromNow < minHoursFromNow) continue;
+                }
+                
+                // Stop at 8:00 PM
+                if (hour === 20 && minute > 0) break;
+                
+                // Format time in 12-hour format
+                let displayHour = hour > 12 ? hour - 12 : hour;
+                if (displayHour === 0) displayHour = 12;
+                const ampm = hour >= 12 ? 'PM' : 'AM';
+                const timeStr = `${displayHour}:${minute.toString().padStart(2, '0')} ${ampm}`;
+                
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'time-slot px-3 py-2 bg-slate-800 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500 rounded-lg text-sm transition';
+                button.textContent = timeStr;
+                button.onclick = () => selectTimeSlot(timeStr, button);
+                
+                gridDiv.appendChild(button);
+            }
+        }
+        
+        timeSlotsDiv.classList.remove('hidden');
+    }
+    
+    function selectTimeSlot(time, button) {
+        // Remove selection from all slots
+        document.querySelectorAll('.time-slot').forEach(slot => {
+            slot.classList.remove('bg-cyan-500', 'border-cyan-500', 'text-white');
+            slot.classList.add('bg-slate-800', 'border-white/10');
+        });
+        
+        // Add selection to clicked slot
+        button.classList.remove('bg-slate-800', 'border-white/10');
+        button.classList.add('bg-cyan-500', 'border-cyan-500', 'text-white');
+        
+        document.getElementById('selectedTime').value = time;
+        validateForm();
+    }
+    
+    function validateForm() {
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        const nombre = form.nombre?.value;
+        const email = form.email?.value;
+        const telefono = form.telefono?.value;
+        const fecha = document.getElementById('selectedDate').value;
+        const hora = document.getElementById('selectedTime').value;
+        const tipo = document.getElementById('selectedMeetingType').value;
+        const checkboxes = form.querySelectorAll('input[type="checkbox"]:required');
+        const allCheckboxesChecked = Array.from(checkboxes).every(cb => cb.checked);
+        
+        const isValid = nombre && email && telefono && fecha && hora && tipo && allCheckboxesChecked;
+        
+        submitBtn.disabled = !isValid;
+    }
+    
+    // Handle form submission
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+        
+        // Add meeting details
+        const fecha = document.getElementById('selectedDate').value;
+        const hora = document.getElementById('selectedTime').value;
+        const tipo = document.getElementById('selectedMeetingType').value;
+        
+        // 1. Send to Formspree
+        try {
+            await fetch('https://formspree.io/f/xqavawbb', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            // 2. Send WhatsApp notification via CallMeBot
+            const whatsappMessage = `📅 *Nueva Reunión Agendada*\n\n` +
+                `*Plan:* ${data.plan}\n` +
+                `*Nombre:* ${data.nombre}\n` +
+                `*Empresa:* ${data.empresa || 'No especificada'}\n` +
+                `*Email:* ${data.email}\n` +
+                `*WhatsApp:* ${data.telefono}\n\n` +
+                `*📅 Fecha:* ${fecha}\n` +
+                `*🕐 Hora:* ${hora}\n` +
+                `*📞 Tipo:* ${tipo === 'llamada' ? 'Llamada telefónica' : 'Videollamada'}\n\n` +
+                `*Mensaje:* ${data.mensaje || 'Sin mensaje adicional'}`;
+            
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappURL = `https://api.callmebot.com/whatsapp.php?phone=573185462265&text=${encodedMessage}&apikey=9482148`;
+            
+            const img = new Image();
+            img.src = whatsappURL;
+            
+            // Redirect to confirmation page with parameters
+            const params = new URLSearchParams({
+                nombre: data.nombre,
+                fecha: fecha,
+                hora: hora,
+                tipo: tipo
+            });
+            window.location.href = `confirmacion.html?${params.toString()}`;
+            
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Hubo un error al agendar. Por favor intenta nuevamente.');
+        }
+    });
+    </script>
 
     <!-- FOOTER -->
     <footer class="site-footer">
