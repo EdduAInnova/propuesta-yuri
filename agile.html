@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     
-                    <button onclick="openContactModal('Agile Flow')" class="btn-premium w-full py-5 rounded-full font-bold text-lg">
+                    <button onclick="openAppointmentModal('Agile Flow')" class="btn-premium w-full py-5 rounded-full font-bold text-lg">
                         <i class="fas fa-bolt mr-2"></i>
                         Quiero Esta Visión
                     </button>
@@ -203,104 +203,146 @@
         </div>
     </section>
     
-    <!-- MODAL DE CONTACTO -->
-    <div id="contactModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] hidden items-center justify-center p-4 md:p-6">
-        <div class="glass-ultra max-w-md w-full rounded-3xl p-6 md:p-8 relative">
-            <button onclick="closeContactModal()" class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 rounded-full glass-ultra flex items-center justify-center hover:bg-white/10 transition">
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- Flatpickr Dark Theme Custom -->
+    <link rel="stylesheet" href="css/flatpickr-dark.css">
+    <!-- Flatpickr Spanish locale -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+    
+    <!-- MODAL DE AGENDAMIENTO COMPARTIDO -->
+    <div id="appointmentModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] hidden items-start justify-center p-4 pt-8 md:pt-12 overflow-y-auto" style="overflow-y: auto !important;">
+        <div class="glass-ultra max-w-3xl w-full rounded-3xl p-6 md:p-8 relative mb-8" style="margin-top: 2rem; min-height: min-content;">
+            <button onclick="closeAppointmentModal()" class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 rounded-full glass-ultra flex items-center justify-center hover:bg-white/10 transition z-10">
                 <i class="fas fa-times"></i>
             </button>
             
-            <h3 class="text-2xl md:text-3xl font-black mb-2">¡Excelente Elección!</h3>
-            <p class="text-gray-400 mb-8">Agendemos una sesión para ultimar detalles.</p>
+            <h3 class="text-2xl md:text-3xl font-black mb-2">Agenda tu Reunión</h3>
+            <p class="text-gray-400 mb-6">Elige la fecha y hora que mejor te convenga</p>
             
-            <form id="contactForm" class="space-y-4">
+            <form id="appointmentForm" class="space-y-5">
                 <input type="hidden" name="plan" id="selectedPlan">
+                <input type="hidden" name="fecha" id="selectedDate">
+                <input type="hidden" name="hora" id="selectedTime">
+                <input type="hidden" name="tipo" id="selectedMeetingType">
                 
+                <!-- Plan seleccionado -->
                 <div>
-                    <label class="block text-sm font-bold mb-2">Plan Seleccionado</label>
-                    <input type="text" id="planDisplay" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 text-cyan-400 font-bold" readonly>
+                    <label class="block text-sm font-bold mb-2 text-cyan-400">Plan Seleccionado</label>
+                    <input type="text" id="planDisplay" class="w-full bg-slate-800/50 border border-cyan-500/30 rounded-xl px-4 py-3 text-cyan-300 font-bold" readonly>
+                </div>
+                
+                <!-- Información personal -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Nombre Completo *</label>
+                        <input type="text" name="nombre" required class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Email *</label>
+                        <input type="email" name="email" required class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                    </div>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" name="nombre" placeholder="Nombre" required class="bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
-                    <input type="text" name="empresa" placeholder="Empresa" class="bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                    <div>
+                        <label class="block text-sm font-bold mb-2">WhatsApp *</label>
+                        <input type="tel" name="telefono" required placeholder="+57 300 123 4567" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Empresa</label>
+                        <input type="text" name="empresa" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                    </div>
                 </div>
                 
-                <input type="email" name="email" placeholder="Email" required class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                <!-- Calendario y horarios -->
+                <div>
+                    <label class="block text-sm font-bold mb-2">
+                        <i class="fas fa-calendar-alt text-cyan-400 mr-2"></i>
+                        Selecciona Fecha y Hora *
+                    </label>
+                    <input type="text" id="datePicker" placeholder="Selecciona una fecha" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition cursor-pointer" required readonly>
+                </div>
                 
-                <input type="tel" name="telefono" placeholder="Teléfono (opcional)" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition">
+                <!-- Time slots -->
+                <div id="timeSlots" class="hidden">
+                    <label class="block text-sm font-bold mb-3">Horarios Disponibles (Hora de Bogotá)</label>
+                    <div id="timeSlotsGrid" class="grid grid-cols-3 sm:grid-cols-4 gap-2"></div>
+                </div>
                 
-                <textarea name="mensaje" placeholder="Mensaje adicional (opcional)" rows="3" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition resize-none"></textarea>
+                <!-- Tipo de reunión -->
+                <div>
+                    <label class="block text-sm font-bold mb-3">
+                        <i class="fas fa-video text-cyan-400 mr-2"></i>
+                        Tipo de Reunión *
+                    </label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="tipoReunion" value="llamada" required class="hidden peer">
+                            <div class="border-2 border-white/10 peer-checked:border-cyan-500 peer-checked:bg-cyan-500/10 rounded-xl p-4 text-center transition">
+                                <i class="fas fa-phone text-3xl mb-2"></i>
+                                <p class="font-bold">Llamada</p>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="tipoReunion" value="videollamada" required class="hidden peer">
+                            <div class="border-2 border-white/10 peer-checked:border-cyan-500 peer-checked:bg-cyan-500/10 rounded-xl p-4 text-center transition">
+                                <i class="fas fa-video text-3xl mb-2"></i>
+                                <p class="font-bold">Videollamada</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
                 
-                <button type="submit" class="btn-premium w-full py-4 rounded-xl font-bold text-lg">
-                    <i class="fas fa-paper-plane mr-2"></i>
-                    Enviar Solicitud
+                <!-- Mensaje opcional -->
+                <div>
+                    <label class="block text-sm font-bold mb-2">Mensaje Adicional</label>
+                    <textarea name="mensaje" rows="3" placeholder="¿Algo específico que quieras discutir?" class="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 outline-none transition resize-none"></textarea>
+                </div>
+                
+                <!-- Términos y condiciones -->
+                <div class="space-y-4 bg-slate-900/50 border border-cyan-500/20 p-5 rounded-xl">
+                    <label class="flex items-start gap-3 cursor-pointer group">
+                        <div class="relative flex-shrink-0 mt-0.5">
+                            <input type="checkbox" required class="peer sr-only">
+                            <div class="w-5 h-5 bg-slate-800 border-2 border-slate-600 rounded peer-checked:bg-gradient-to-br peer-checked:from-cyan-500 peer-checked:to-blue-600 peer-checked:border-cyan-400 transition-all duration-200 flex items-center justify-center">
+                                <svg class="w-3 h-3 text-white hidden peer-checked:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-300 group-hover:text-white transition leading-relaxed">
+                            He leído y acepto la <a href="#" class="text-cyan-400 hover:text-cyan-300 hover:underline font-semibold">Política de Privacidad</a> y el tratamiento de mis datos personales
+                        </span>
+                    </label>
+                    
+                    <label class="flex items-start gap-3 cursor-pointer group">
+                        <div class="relative flex-shrink-0 mt-0.5">
+                            <input type="checkbox" required class="peer sr-only">
+                            <div class="w-5 h-5 bg-slate-800 border-2 border-slate-600 rounded peer-checked:bg-gradient-to-br peer-checked:from-cyan-500 peer-checked:to-blue-600 peer-checked:border-cyan-400 transition-all duration-200 flex items-center justify-center">
+                                <svg class="w-3 h-3 text-white hidden peer-checked:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-300 group-hover:text-white transition leading-relaxed">
+                            Acepto los <a href="#" class="text-cyan-400 hover:text-cyan-300 hover:underline font-semibold">Términos y Condiciones</a> del servicio
+                        </span>
+                    </label>
+                </div>
+                
+                <button type="submit" id="submitBtn" disabled class="btn-premium w-full py-4 rounded-xl font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed transition">
+                    <i class="fas fa-calendar-check mr-2"></i>
+                    Agendar Reunión
                 </button>
             </form>
-            
-            <script>
-            // Handle form submission with Formspree + CallMeBot WhatsApp
-            document.getElementById('contactForm').addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                const formData = new FormData(this);
-                const data = Object.fromEntries(formData);
-                
-                // 1. Send to Formspree
-                try {
-                    await fetch('https://formspree.io/f/xqavawbb', {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-                    
-                    // 2. Send WhatsApp notification via CallMeBot
-                    const whatsappMessage = `🔔 Nueva Solicitud de Propuesta\n\n` +
-                        `Plan: ${data.plan}\n` +
-                        `Nombre: ${data.nombre}\n` +
-                        `Empresa: ${data.empresa || 'No especificada'}\n` +
-                        `Email: ${data.email}\n` +
-                        `Teléfono: ${data.telefono || 'No especificado'}\n` +
-                        `Mensaje: ${data.mensaje || 'Sin mensaje'}`;
-                    
-                    const encodedMessage = encodeURIComponent(whatsappMessage);
-                    const whatsappURL = `https://api.callmebot.com/whatsapp.php?phone=573185462265&text=${encodedMessage}&apikey=9482148`;
-                    
-                    // Send to CallMeBot (using image pixel trick to avoid CORS)
-                    const img = new Image();
-                    img.src = whatsappURL;
-                    
-                    // Show success message and redirect
-                    window.location.href = 'confirmacion.html';
-                    
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert('Hubo un error al enviar. Por favor intenta nuevamente.');
-                }
-            });
-            </script>
         </div>
     </div>
-
-    <!-- FOOTER -->
-    <footer class="site-footer">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="flex justify-center gap-6 mb-8">
-                <a href="https://www.facebook.com/Edduainnova" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/edduainnova/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
-                <a href="https://x.com/EdduAInnova" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
-                <a href="https://github.com/EdduAInnova" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
-            </div>
-            <p class="text-gray-400 text-sm mb-4">
-                EdduAInnova <br> Transformando negocios a través de código limpio e Inteligencia Artificial.
-            </p>
-            <p class="text-gray-500 text-sm">
-                Copyright © 2025 EdduAInnova
-            </p>
-        </div>
-    </footer>
+    
+    
+    <!-- Script del Modal de Agendamiento -->
+    <script src="js/modal-agendamiento.js"></script>
 
     <!-- WHATSAPP WIDGET -->
     <div class="whatsapp-widget">
@@ -309,6 +351,34 @@
         </a>
     </div>
 
+    <!-- FOOTER WITH SOCIAL MEDIA -->
+    <footer class="py-16 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 text-center">
+            <p class="text-gray-500 text-sm mb-4">Síguenos en nuestras redes</p>
+            <div class="flex justify-center gap-4 mb-8">
+                <a href="https://www.facebook.com/Edduainnova" target="_blank" class="w-12 h-12 rounded-full glass-ultra hover:bg-cyan-500/20 flex items-center justify-center transition group">
+                    <i class="fab fa-facebook-f text-gray-400 group-hover:text-cyan-400 group-hover:scale-110 transition-all"></i>
+                </a>
+                <a href="https://www.instagram.com/edduainnova/" target="_blank" class="w-12 h-12 rounded-full glass-ultra hover:bg-cyan-500/20 flex items-center justify-center transition group">
+                    <i class="fab fa-instagram text-gray-400 group-hover:text-cyan-400 group-hover:scale-110 transition-all"></i>
+                </a>
+                <a href="https://x.com/EdduAInnova" target="_blank" class="w-12 h-12 rounded-full glass-ultra hover:bg-cyan-500/20 flex items-center justify-center transition group">
+                    <i class="fab fa-twitter text-gray-400 group-hover:text-cyan-400 group-hover:scale-110 transition-all"></i>
+                </a>
+                <a href="https://github.com/EdduAInnova" target="_blank" class="w-12 h-12 rounded-full glass-ultra hover:bg-cyan-500/20 flex items-center justify-center transition group">
+                    <i class="fab fa-github text-gray-400 group-hover:text-cyan-400 group-hover:scale-110 transition-all"></i>
+                </a>
+            </div>
+            <p class="text-gray-500 text-sm">
+                <span class="font-bold gradient-text">EdduAInnova</span><br>
+                Transformando negocios a través de código limpio e Inteligencia Artificial.
+            </p>
+            <p class="text-gray-600 text-xs mt-2">
+                Copyright © 2025 EdduAInnova
+            </p>
+        </div>
+    </footer>
+    
     <!-- Custom Scripts -->
     <script src="js/script.js"></script>
 </body>
