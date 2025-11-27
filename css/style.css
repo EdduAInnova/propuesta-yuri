@@ -6,6 +6,23 @@
     --darker: #020617;
 }
 
+/* =========================================
+   Z-INDEX HIERARCHY - GLOBAL FIX
+   ========================================= */
+
+/* Orden de capas (de menor a mayor) */
+.particles { z-index: -1 !important; }
+.spotlight { z-index: 0 !important; }
+nav { z-index: 50 !important; }
+.loading-screen { z-index: 9998 !important; }
+#appointmentModal { z-index: 9999 !important; }
+.whatsapp-widget { z-index: 99999 !important; } /* SIEMPRE visible */
+
+/* Asegurar que el modal no tape el widget */
+#appointmentModal.flex ~ .whatsapp-widget {
+    z-index: 99999 !important;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -347,12 +364,32 @@ body:hover .spotlight {
 }
 
 /* WHATSAPP WIDGET */
+/* WHATSAPP WIDGET - FIX DEFINITIVO */
 .whatsapp-widget {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    z-index: 9990;
+    z-index: 99999 !important; /* MÁS ALTO que modal */
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: auto !important;
+}
+
+/* CRÍTICO: Asegurar visibilidad en mobile */
+@media (max-width: 767px) {
+    .whatsapp-widget {
+        bottom: 20px !important;
+        right: 20px !important;
+        z-index: 99999 !important;
+        position: fixed !important;
+    }
+}
+
+/* CRÍTICO: Mantener visible incluso con modal abierto */
+body:has(#appointmentModal.flex) .whatsapp-widget {
+    z-index: 99999 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
 }
 
 .whatsapp-btn {
@@ -369,6 +406,14 @@ body:hover .spotlight {
     text-decoration: none;
     position: relative;
     overflow: hidden;
+}
+
+@media (max-width: 767px) {
+    .whatsapp-btn {
+        width: 56px !important;
+        height: 56px !important;
+        font-size: 28px !important;
+    }
 }
 
 .whatsapp-btn::before {
@@ -1119,5 +1164,261 @@ body:hover .spotlight {
     
     .btn-premium {
         font-size: 0.9rem !important;
+    }
+}
+
+/* =========================================
+   FIX CRÍTICO FORMULARIO MOBILE
+   ========================================= */
+@media (max-width: 767px) {
+    
+    /* CRÍTICO: Fix Grid Layouts en Formulario */
+    #appointmentForm .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    
+    #appointmentForm .md\:grid-cols-2 {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* CRÍTICO: Inputs Full Width */
+    #appointmentForm input,
+    #appointmentForm textarea,
+    #appointmentForm select {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* CRÍTICO: Labels con espacio adecuado */
+    #appointmentForm label {
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* CRÍTICO: Radio buttons (Tipo de Reunión) */
+    #appointmentForm .grid.grid-cols-2 {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+    }
+    
+    #appointmentForm input[type="radio"] + div {
+        padding: 1rem !important;
+        text-align: center !important;
+    }
+    
+    /* CRÍTICO: Checkboxes área completa */
+    #appointmentForm label:has(input[type="checkbox"]) {
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 0.75rem !important;
+        padding: 0.75rem !important;
+        min-height: 56px !important;
+        width: 100% !important;
+    }
+    
+    #appointmentForm label:has(input[type="checkbox"]) > div {
+        flex-shrink: 0 !important;
+    }
+    
+    #appointmentForm label:has(input[type="checkbox"]) > span {
+        flex: 1 !important;
+        padding-top: 0.25rem !important;
+    }
+    
+    /* CRÍTICO: Contenedor de Términos */
+    #appointmentForm .space-y-4,
+    #appointmentForm .space-y-3 {
+        width: 100% !important;
+        padding: 1rem !important;
+    }
+    
+    /* CRÍTICO: Botón Submit Full Width */
+    #appointmentForm button[type="submit"] {
+        width: 100% !important;
+        margin-top: 1.5rem !important;
+    }
+    
+    /* CRÍTICO: Plan Display Input */
+    #planDisplay {
+        width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    
+    /* CRÍTICO: Textarea altura adecuada */
+    #appointmentForm textarea {
+        min-height: 80px !important;
+    }
+    
+    /* CRÍTICO: Eliminar padding/margin conflictivo */
+    #appointmentForm > * {
+        max-width: 100% !important;
+    }
+    
+    /* CRÍTICO: Container del modal más ancho */
+    #appointmentModal > div {
+        width: calc(100vw - 1rem) !important;
+        max-width: calc(100vw - 1rem) !important;
+        padding: 1rem !important;
+        margin: 0.5rem !important;
+    }
+    
+    /* CRÍTICO: Header del modal */
+    #appointmentModal h3 {
+        font-size: 1.5rem !important;
+        margin-bottom: 0.5rem !important;
+        padding-right: 3rem !important; /* Espacio para botón cerrar */
+    }
+    
+    /* CRÍTICO: Espaciado entre campos */
+    #appointmentForm .space-y-5 > *:not(:first-child) {
+        margin-top: 1rem !important;
+    }
+}
+
+/* FIX para grids de propuestas */
+@media (max-width: 767px) {
+    .mobile-optimized-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+        padding: 0 !important;
+    }
+    
+    .mobile-optimized-grid > div {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 767px) {
+    /* CRÍTICO: Prevenir overflow hidden que oculta elementos */
+    /* CRÍTICO: Prevenir overflow hidden que oculta elementos */
+    body,
+    html {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        width: 100% !important;
+        position: relative !important;
+    }
+
+    main,
+    section {
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+    
+    /* FIX: Usar dvh (dynamic viewport height) para evitar saltos con la barra de dirección */
+    .min-h-screen {
+        min-height: 100dvh !important;
+    }
+    
+    /* CRÍTICO: Modal debe permitir scroll */
+    #appointmentModal {
+        overflow-y: scroll !important;
+        overflow-x: hidden !important;
+    }
+    
+    /* CRÍTICO: Containers no deben ocultar contenido */
+    .max-w-7xl,
+    .max-w-4xl,
+    .max-w-3xl {
+        overflow: visible !important;
+    }
+    
+    /* CRÍTICO: Glass cards no deben desbordar */
+    .glass-ultra {
+        overflow: visible !important;
+    }
+}
+
+@media (max-width: 767px) {
+    /* CRÍTICO: Mockups responsivos */
+    .mockup-3d,
+    .mockup-screen {
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+    
+    .mockup-screen {
+        height: auto !important;
+        min-height: 400px !important;
+        max-height: 500px !important;
+    }
+    
+    /* CRÍTICO: Mockup content debe ajustarse */
+    .mockup-content {
+        padding: 0.5rem !important;
+        overflow: hidden !important;
+    }
+    
+    /* CRÍTICO: Mini elementos en mockup */
+    .mini-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.5rem !important;
+    }
+    
+    .mini-card {
+        padding: 0.5rem !important;
+        min-height: auto !important;
+    }
+    
+    /* CRÍTICO: Premium mockup (más complejo) */
+    .mockup-screen .grid-cols-4 {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* =========================================
+   FIX VISUAL FINAL (User Feedback)
+   ========================================= */
+
+/* 1. Ocultar WhatsApp cuando el modal está abierto para evitar conflictos */
+#appointmentModal.flex ~ .whatsapp-widget,
+body:has(#appointmentModal.flex) .whatsapp-widget {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* 2. Mejorar márgenes globales en móvil */
+@media (max-width: 767px) {
+    section {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        padding-top: 8rem !important; /* FIX: Más espacio superior para el navbar fijo */
+        padding-bottom: 4rem !important; /* FIX: Más espacio inferior */
+    }
+    
+    .max-w-7xl {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+    
+    /* Más aire en el modal */
+    #appointmentModal > div {
+        padding: 1.5rem !important;
+        width: calc(100% - 2rem) !important;
+        margin: 1rem auto !important;
+    }
+    
+    /* Inputs más altos y elegantes */
+    #appointmentForm input,
+    #appointmentForm select,
+    #appointmentForm textarea {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+        font-size: 16px !important; /* Prevenir zoom iOS */
+    }
+    
+    /* Títulos de sección más pequeños para que no corten */
+    h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.1 !important;
+    }
+    
+    h2 {
+        font-size: 2rem !important;
     }
 }

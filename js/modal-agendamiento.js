@@ -4,7 +4,6 @@
 // Variable global para mantener el plan seleccionado
 let currentSelectedPlan = '';
 
-// Función para abrir el modal con el plan pre-seleccionado
 function openAppointmentModal(planName) {
     currentSelectedPlan = planName;
     const modal = document.getElementById('appointmentModal');
@@ -16,23 +15,28 @@ function openAppointmentModal(planName) {
         selectedPlanInput.value = planName;
         modal.classList.remove('hidden');
         modal.classList.add('flex');
+        
+        // FIX: Prevenir scroll del body pero mantener scroll del modal
         document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
     }
 }
 
-// Función para cerrar el modal
 function closeAppointmentModal() {
     const modal = document.getElementById('appointmentModal');
     if (modal) {
         modal.classList.add('hidden');
         modal.classList.remove('flex');
-        document.body.style.overflow = 'auto';
         
-        // Reset form
+        // FIX: Restaurar scroll del body
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        
         const form = document.getElementById('appointmentForm');
         if (form) form.reset();
         
-        // Reset time slots
         const timeSlots = document.getElementById('timeSlots');
         if (timeSlots) timeSlots.classList.add('hidden');
     }
@@ -49,24 +53,20 @@ document.addEventListener('DOMContentLoaded', function() {
 let picker = null;
 function initializeFlatpickr() {
     const now = new Date();
-    const minDate = new Date(now.getTime() + 6 * 60 * 60 * 1000); // 6 hours from now
+    const minDate = new Date(now.getTime() + 6 * 60 * 60 * 1000);
     
-    // Mobile detection
     const isMobile = window.innerWidth < 768;
     
     picker = flatpickr("#datePicker", {
         locale: "es",
         minDate: minDate,
         dateFormat: "Y-m-d",
-        // MOBILE OPTIMIZATIONS:
-        static: !isMobile, // false en mobile para mejor posicionamiento
-        position: "auto",
-        appendTo: isMobile ? document.getElementById('appointmentModal') : undefined,
-        // Usar inline en móviles muy pequeños
-        inline: window.innerWidth < 480,
+        static: false, // Siempre popup
+        position: isMobile ? "above center" : "auto center", // FIX: Posición fija en mobile
+        appendTo: isMobile ? document.body : undefined, // FIX: Append a body en mobile
+        inline: false,
         disable: [
             function(date) {
-                // Disable Sundays (0)
                 return date.getDay() === 0;
             }
         ],
@@ -76,15 +76,19 @@ function initializeFlatpickr() {
                 generateTimeSlots(selectedDates[0]);
             }
         },
-        // MOBILE: Prevenir scroll issues
         onOpen: function() {
             if (isMobile) {
-                document.body.style.overflow = 'hidden';
-            }
-        },
-        onClose: function() {
-            if (isMobile) {
-                document.body.style.overflow = 'auto';
+                // FIX: Posicionar calendario correctamente
+                setTimeout(() => {
+                    const calendar = document.querySelector('.flatpickr-calendar');
+                    if (calendar) {
+                        calendar.style.position = 'fixed';
+                        calendar.style.top = '50%';
+                        calendar.style.left = '50%';
+                        calendar.style.transform = 'translate(-50%, -50%)';
+                        calendar.style.zIndex = '100000';
+                    }
+                }, 10);
             }
         }
     });
@@ -100,25 +104,21 @@ function generateTimeSlots(selectedDate) {
     const isToday = selectedDate.toDateString() === now.toDateString();
     const minHoursFromNow = 6;
     
-    // MOBILE: Reducir intervalos a 30min en vez de 15min para menos botones
-    const interval = window.innerWidth < 768 ? 30 : 15;
+    // DENTRO de generateTimeSlots(), reemplazar el loop de minutes:
+    const interval = window.innerWidth < 768 ? 30 : 15; // FIX: 30min en mobile
     
-    // Generate time slots from 9 AM to 7 PM (12-hour format)
     for (let hour = 9; hour <= 19; hour++) {
-        for (let minute = 0; minute < 60; minute += interval) {
+        for (let minute = 0; minute < 60; minute += interval) { // USA interval variable
             const slotDate = new Date(selectedDate);
             slotDate.setHours(hour, minute, 0, 0);
             
-            // Skip if it's today and slot is less than 6 hours from now
             if (isToday) {
                 const hoursFromNow = (slotDate - now) / (1000 * 60 * 60);
                 if (hoursFromNow < minHoursFromNow) continue;
             }
             
-            // Stop at 7:00 PM
             if (hour === 19 && minute > 0) break;
             
-            // Format time in 12-hour format
             let displayHour = hour > 12 ? hour - 12 : hour;
             if (displayHour === 0) displayHour = 12;
             const ampm = hour >= 12 ? 'PM' : 'AM';
@@ -126,8 +126,7 @@ function generateTimeSlots(selectedDate) {
             
             const button = document.createElement('button');
             button.type = 'button';
-            // MOBILE-OPTIMIZED CLASSES:
-            button.className = 'time-slot px-2 sm:px-3 py-2.5 bg-slate-800 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500 rounded-lg text-xs sm:text-sm transition min-h-[40px] flex items-center justify-center';
+            button.className = 'time-slot px-2 sm:px-3 py-2.5 bg-slate-800 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500 rounded-lg text-xs sm:text-sm transition min-h-[44px] flex items-center justify-center';
             button.textContent = timeStr;
             button.onclick = () => selectTimeSlot(timeStr, button);
             
