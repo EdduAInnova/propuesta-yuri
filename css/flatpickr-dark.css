@@ -1,0 +1,82 @@
+/* Flatpickr Dark Theme - Custom for EdduAInnova */
+.flatpickr-calendar {
+    background: rgb(15 23 42 / 0.95) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(14, 165, 233, 0.2) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.flatpickr-months {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.flatpickr-current-month {
+    color: #fff !important;
+}
+
+.flatpickr-monthDropdown-months {
+    background: rgb(30 41 59) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.flatpickr-monthDropdown-months option {
+    background: rgb(30 41 59) !important;
+    color: #fff !important;
+}
+
+.numInputWrapper input {
+    background: rgb(30 41 59) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.flatpickr-weekdays {
+    background: transparent !important;
+}
+
+.flatpickr-weekday {
+    color: rgb(148 163 184) !important;
+}
+
+.flatpickr-days {
+    background: transparent !important;
+}
+
+.flatpickr-day {
+    color: #94a3b8 !important;
+    border: none !important;
+}
+
+.flatpickr-day:hover {
+    background: rgba(14, 165, 233, 0.2) !important;
+    border-color: rgba(14, 165, 233, 0.5) !important;
+    color: #fff !important;
+}
+
+.flatpickr-day.today {
+    border-color: rgba(14, 165, 233, 0.5) !important;
+    background: rgba(14, 165, 233, 0.1) !important;
+    color: #0ea5e9 !important;
+}
+
+.flatpickr-day.selected {
+    background: #0ea5e9 !important;
+    border-color: #0ea5e9 !important;
+    color: #fff !important;
+}
+
+.flatpickr-day.disabled {
+    color: rgb(51 65 85) !important;
+}
+
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+    fill: #94a3b8 !important;
+}
+
+.flatpickr-prev-month:hover svg,
+.flatpickr-next-month:hover svg {
+    fill: #0ea5e9 !important;
+}
