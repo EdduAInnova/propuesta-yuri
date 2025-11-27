@@ -708,3 +708,250 @@ body:hover .spotlight {
     from { transform: translateX(-20px);  opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
 }
+
+/* =========================================
+   MOBILE-FIRST OPTIMIZATIONS
+   ========================================= */
+
+/* Base Mobile Adjustments (Portrait Mobile) */
+@media (max-width: 767px) {
+    /* Modal Scroll Fix - Critical for mobile usability */
+    #appointmentModal {
+        align-items: flex-start !important;
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    
+    #appointmentModal > div {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        max-height: calc(100vh - 2rem);
+        overflow-y: auto;
+        padding: 1rem !important;
+    }
+    
+    /* Form Elements - Touch-Friendly WCAG 2.1 Compliance */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    select {
+        min-height: 44px !important;
+        font-size: 16px !important; /* Prevent iOS zoom */
+        padding: 0.75rem !important;
+    }
+    
+    /* Checkbox Touch Areas - 44x44px minimum */
+    input[type="checkbox"] + div {
+        min-width: 24px !important;
+        min-height: 24px !important;
+    }
+    
+    /* Checkbox labels with proper touch targets */
+    label:has(input[type="checkbox"]) {
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    /* Time Slots Responsive Grid */
+    #timeSlotsGrid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0.5rem !important;
+    }
+    
+    .time-slot {
+        padding: 0.625rem 0.5rem !important;
+        font-size: 0.75rem !important;
+        min-height: 40px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Button Adjustments for Mobile */
+    .btn-premium {
+        font-size: 1rem !important;
+        padding: 1rem !important;
+    }
+    
+    button[type="submit"] {
+        min-height: 48px !important;
+        font-size: 1rem !important;
+    }
+    
+    /* Hero Sections - Reduced Padding */
+    .min-h-screen {
+        padding-top: 4rem !important;
+        padding-bottom: 2rem !important;
+    }
+    
+    section.min-h-screen {
+        padding-top: 7rem !important; /* Increased from 5rem for better spacing on mobile */
+    }
+    
+    /* Mockups - Disable 3D Transforms for Performance */
+    .mockup-screen {
+        transform: none !important;
+    }
+    
+    .mockup-screen:hover {
+        transform: none !important;
+    }
+    
+    .mockup-3d:hover .mockup-screen {
+        transform: none !important;
+    }
+    
+    /* Navigation - Mobile Spacing */
+    nav {
+        padding: 0.75rem 1rem !important;
+    }
+    
+    nav .max-w-7xl {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    
+    /* Grid Layouts - Force Single Column */
+    .grid.md\:grid-cols-2,
+    .grid.lg\:grid-cols-2 {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .grid.md\:grid-cols-3,
+    .grid.lg\:grid-cols-3 {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Glass Ultra - Performance Optimization */
+    .glass-ultra {
+        backdrop-filter: blur(10px) saturate(150%) !important;
+    }
+    
+    /* Tooltips Disabled on Mobile (too small) */
+    .tech-term::after {
+        display: none !important;
+    }
+    
+    /* WhatsApp Widget - Mobile Positioning */
+    .whatsapp-widget {
+        bottom: 20px !important;
+        right: 20px !important;
+    }
+    
+    .whatsapp-btn {
+        width: 56px !important;
+        height: 56px !important;
+        font-size: 28px !important;
+    }
+    
+    /* Typography - Mobile Readability */
+    h1 {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    h2 {
+        font-size: 1.75rem !important;
+    }
+    
+    h3 {
+        font-size: 1.5rem !important;
+    }
+    
+    /* Modal Header Close Button - Touch Friendly */
+    #appointmentModal button[onclick*="close"] {
+        width: 44px !important;
+        height: 44px !important;
+        top: 0.5rem !important;
+        right: 0.5rem !important;
+    }
+    
+    /* Footer Social Links - Touch Targets */
+    .social-link {
+        width: 44px !important;
+        height: 44px !important;
+    }
+    
+    /* Reduce Spacing in Modal Form */
+    #appointmentForm .space-y-5 > * + * {
+        margin-top: 1rem !important;
+    }
+    
+    /* Date Picker - Mobile Friendly */
+    #datePicker {
+        font-size: 16px !important;
+        min-height: 44px !important;
+    }
+    
+    /* Flatpickr Calendar - Mobile Adjustments */
+    .flatpickr-calendar {
+        max-width: 100% !important;
+    }
+}
+
+/* Tablet Adjustments (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Time Slots - 4 Columns on Tablet */
+    #timeSlotsGrid {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+    
+    /* Modal - Comfortable Padding */
+    #appointmentModal > div {
+        padding: 2rem !important;
+    }
+    
+    /* Typography - Tablet Size */
+    h1 {
+        font-size: 2.5rem !important;
+    }
+}
+
+/* Landscape Mobile (Small Height) */
+@media (max-width: 767px) and (orientation: landscape) {
+    /* Modal - Fit in Landscape */
+    #appointmentModal > div {
+        max-height: calc(100vh - 1rem) !important;
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Hero Sections - Auto Height */
+    .min-h-screen,
+    section.min-h-screen {
+        min-height: auto !important;
+        padding-top: 3rem !important;
+        padding-bottom: 2rem !important;
+    }
+    
+    /* Reduce Vertical Spacing */
+    .space-y-6 > * + * {
+        margin-top: 1rem !important;
+    }
+}
+
+/* Small Mobile Devices (320px - 374px) */
+@media (max-width: 374px) {
+    /* Extra compact modal */
+    #appointmentModal > div {
+        padding: 0.75rem !important;
+    }
+    
+    /* Smaller font sizes */
+    h3 {
+        font-size: 1.25rem !important;
+    }
+    
+    /* Time slots - even more compact */
+    .time-slot {
+        font-size: 0.7rem !important;
+        padding: 0.5rem 0.25rem !important;
+    }
+    
+    /* Button text size */
+    .btn-premium {
+        font-size: 0.9rem !important;
+    }
+}

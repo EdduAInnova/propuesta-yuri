@@ -51,10 +51,19 @@ function initializeFlatpickr() {
     const now = new Date();
     const minDate = new Date(now.getTime() + 6 * 60 * 60 * 1000); // 6 hours from now
     
+    // Mobile detection
+    const isMobile = window.innerWidth < 768;
+    
     picker = flatpickr("#datePicker", {
         locale: "es",
         minDate: minDate,
         dateFormat: "Y-m-d",
+        // MOBILE OPTIMIZATIONS:
+        static: !isMobile, // false en mobile para mejor posicionamiento
+        position: "auto",
+        appendTo: isMobile ? document.getElementById('appointmentModal') : undefined,
+        // Usar inline en móviles muy pequeños
+        inline: window.innerWidth < 480,
         disable: [
             function(date) {
                 // Disable Sundays (0)
@@ -65,6 +74,17 @@ function initializeFlatpickr() {
             if (selectedDates.length > 0) {
                 document.getElementById('selectedDate').value = dateStr;
                 generateTimeSlots(selectedDates[0]);
+            }
+        },
+        // MOBILE: Prevenir scroll issues
+        onOpen: function() {
+            if (isMobile) {
+                document.body.style.overflow = 'hidden';
+            }
+        },
+        onClose: function() {
+            if (isMobile) {
+                document.body.style.overflow = 'auto';
             }
         }
     });
@@ -80,9 +100,12 @@ function generateTimeSlots(selectedDate) {
     const isToday = selectedDate.toDateString() === now.toDateString();
     const minHoursFromNow = 6;
     
-    // Generate time slots from 9 AM to 7 PM (12-hour format) with 15-minute intervals
+    // MOBILE: Reducir intervalos a 30min en vez de 15min para menos botones
+    const interval = window.innerWidth < 768 ? 30 : 15;
+    
+    // Generate time slots from 9 AM to 7 PM (12-hour format)
     for (let hour = 9; hour <= 19; hour++) {
-        for (let minute = 0; minute < 60; minute += 15) {
+        for (let minute = 0; minute < 60; minute += interval) {
             const slotDate = new Date(selectedDate);
             slotDate.setHours(hour, minute, 0, 0);
             
@@ -103,7 +126,8 @@ function generateTimeSlots(selectedDate) {
             
             const button = document.createElement('button');
             button.type = 'button';
-            button.className = 'time-slot px-3 py-2 bg-slate-800 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500 rounded-lg text-sm transition';
+            // MOBILE-OPTIMIZED CLASSES:
+            button.className = 'time-slot px-2 sm:px-3 py-2.5 bg-slate-800 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500 rounded-lg text-xs sm:text-sm transition min-h-[40px] flex items-center justify-center';
             button.textContent = timeStr;
             button.onclick = () => selectTimeSlot(timeStr, button);
             

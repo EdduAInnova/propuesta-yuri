@@ -15,13 +15,13 @@ function hideLoader() {
 
 // Hide immediately if already loaded, otherwise wait for load event
 if (document.readyState === 'complete') {
-    setTimeout(hideLoader, 500);
+    setTimeout(hideLoader, window.innerWidth < 768 ? 200 : 500);
 } else {
-    window.addEventListener('load', () => setTimeout(hideLoader, 500));
+    window.addEventListener('load', () => setTimeout(hideLoader, window.innerWidth < 768 ? 200 : 500));
 }
 
-// Safety fallback: Force hide after 2 seconds no matter what
-setTimeout(hideLoader, 2000);
+// Safety fallback: Force hide after timeout (faster on mobile)
+setTimeout(hideLoader, window.innerWidth < 768 ? 1000 : 2000);
 
 // ===== UTILS =====
 const isMobile = () => window.innerWidth < 768;
@@ -83,8 +83,8 @@ function closeContactModal() {
     }
 }
 
-// ===== GSAP ANIMATIONS =====
-if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+// ===== GSAP ANIMATIONS (DESKTOP ONLY) =====
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && window.innerWidth >= 768) {
     gsap.registerPlugin(ScrollTrigger);
     
     // Animate cards on scroll
