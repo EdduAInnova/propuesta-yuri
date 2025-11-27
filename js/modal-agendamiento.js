@@ -80,9 +80,9 @@ function generateTimeSlots(selectedDate) {
     const isToday = selectedDate.toDateString() === now.toDateString();
     const minHoursFromNow = 6;
     
-    // Generate time slots from 8 AM to 8 PM (12-hour format)
-    for (let hour = 8; hour <= 20; hour++) {
-        for (let minute = 0; minute < 60; minute += 30) {
+    // Generate time slots from 9 AM to 7 PM (12-hour format) with 15-minute intervals
+    for (let hour = 9; hour <= 19; hour++) {
+        for (let minute = 0; minute < 60; minute += 15) {
             const slotDate = new Date(selectedDate);
             slotDate.setHours(hour, minute, 0, 0);
             
@@ -92,8 +92,8 @@ function generateTimeSlots(selectedDate) {
                 if (hoursFromNow < minHoursFromNow) continue;
             }
             
-            // Stop at 8:00 PM
-            if (hour === 20 && minute > 0) break;
+            // Stop at 7:00 PM
+            if (hour === 19 && minute > 0) break;
             
             // Format time in 12-hour format
             let displayHour = hour > 12 ? hour - 12 : hour;
