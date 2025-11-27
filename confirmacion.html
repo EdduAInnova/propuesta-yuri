@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud Enviada | EdduAInnova</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Checkmark Animation */
+        .checkmark-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+        
+        .checkmark {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 3;
+            stroke: #0ea5e9;
+            stroke-miterlimit: 10;
+            margin: 0 auto;
+            box-shadow: inset 0px 0px 0px #0ea5e9;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+        
+        .checkmark-check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+        
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        @keyframes scale {
+            0%, 100% {
+                transform: none;
+            }
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+        
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 60px #0ea5e9;
+            }
+        }
+        
+        /* Fade in animation */
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Pulse animation for icons */
+        .pulse-icon {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- PARTÍCULAS DE FONDO -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- CONFIRMACIÓN SECTION -->
+    <section class="min-h-screen flex items-center justify-center px-4 md:px-6 py-20">
+        <div class="max-w-2xl mx-auto text-center">
+            <!-- Checkmark animado -->
+            <div class="mb-8">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </div>
+            
+            <!-- Título -->
+            <h1 class="text-4xl md:text-6xl font-black mb-6 gradient-text fade-in" style="animation-delay: 0.3s; font-family: 'Playfair Display', serif;">
+                ¡Solicitud Enviada!
+            </h1>
+            
+            <!-- Mensaje principal -->
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 fade-in" style="animation-delay: 0.5s;">
+                Gracias por tu interés en nuestros servicios
+            </p>
+            
+            <!-- Card con información -->
+            <div class="glass-ultra p-6 md:p-8 rounded-3xl mb-8 fade-in" style="animation-delay: 0.7s;">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0 pulse-icon">
+                        <i class="fab fa-whatsapp text-2xl text-green-400"></i>
+                    </div>
+                    <div class="text-left">
+                        <h3 class="font-bold text-lg mb-2 text-white">Confirmación por WhatsApp</h3>
+                        <p class="text-gray-400 text-sm">Recibirás una confirmación en tu WhatsApp en unos instantes</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center flex-shrink-0 pulse-icon" style="animation-delay: 0.5s;">
+                        <i class="fas fa-envelope text-2xl text-cyan-400"></i>
+                    </div>
+                    <div class="text-left">
+                        <h3 class="font-bold text-lg mb-2 text-white">Confirmación por Email</h3>
+                        <p class="text-gray-400 text-sm">También enviamos los detalles a tu correo electrónico</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Información adicional -->
+            <div class="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-2xl p-6 mb-8 fade-in" style="animation-delay: 0.9s;">
+                <p class="text-cyan-300 font-semibold mb-2">
+                    <i class="fas fa-clock mr-2"></i>
+                    ¿Qué sigue?
+                </p>
+                <p class="text-gray-300 text-sm">
+                    Nuestro equipo revisará tu solicitud y te contactará en un plazo máximo de 24 horas para agendar una sesión de consultoría personalizada.
+                </p>
+            </div>
+            
+            <!-- Botón de regreso -->
+            <a href="index.html" class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full font-bold text-lg text-white hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 group fade-in" style="animation-delay: 1.1s;">
+                <i class="fas fa-home"></i>
+                <span>Volver al Inicio</span>
+            </a>
+            
+            <!-- Social links -->
+            <div class="mt-12 fade-in" style="animation-delay: 1.3s;">
+                <p class="text-gray-500 text-sm mb-4">Síguenos en nuestras redes</p>
+                <div class="flex justify-center gap-4">
+                    <a href="https://www.facebook.com/Edduainnova" target="_blank" class="w-10 h-10 rounded-full bg-white/5 hover:bg-cyan-500/20 flex items-center justify-center transition">
+                        <i class="fab fa-facebook-f text-gray-400 hover:text-cyan-400"></i>
+                    </a>
+                    <a href="https://www.instagram.com/edduainnova/" target="_blank" class="w-10 h-10 rounded-full bg-white/5 hover:bg-cyan-500/20 flex items-center justify-center transition">
+                        <i class="fab fa-instagram text-gray-400 hover:text-cyan-400"></i>
+                    </a>
+                    <a href="https://x.com/EdduAInnova" target="_blank" class="w-10 h-10 rounded-full bg-white/5 hover:bg-cyan-500/20 flex items-center justify-center transition">
+                        <i class="fab fa-twitter text-gray-400 hover:text-cyan-400"></i>
+                    </a>
+                    <a href="https://github.com/EdduAInnova" target="_blank" class="w-10 h-10 rounded-full bg-white/5 hover:bg-cyan-500/20 flex items-center justify-center transition">
+                        <i class="fab fa-github text-gray-400 hover:text-cyan-400"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Custom Scripts -->
+    <script src="js/script.js"></script>
+    
+    <!-- Auto redirect after 30 seconds -->
+    <script>
+        // Optional: Auto redirect to home after 30 seconds
+        setTimeout(() => {
+            // Uncomment to enable auto-redirect
+            // window.location.href = 'index.html';
+        }, 30000);
+    </script>
+</body>
+</html>
