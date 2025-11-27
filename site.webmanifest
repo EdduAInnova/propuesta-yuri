@@ -1,0 +1,23 @@
+{
+    "name": "EdduAInnova - Propuesta Estratégica AgileCMCons",
+    "short_name": "EdduAInnova",
+    "description": "Transformando negocios a través de código limpio e Inteligencia Artificial",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#0ea5e9",
+    "background_color": "#020617",
+    "display": "standalone",
+    "orientation": "portrait",
+    "start_url": "/",
+    "scope": "/"
+}
