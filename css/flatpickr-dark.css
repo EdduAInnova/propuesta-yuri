@@ -80,3 +80,14 @@
 .flatpickr-next-month:hover svg {
     fill: #0ea5e9 !important;
 }
+
+/* Ensure calendar doesn't interfere with modal scroll */
+.flatpickr-calendar.open {
+    position: absolute !important;
+    z-index: 10000 !important;
+}
+
+/* Allow scrolling even when flatpickr is open */
+.flatpickr-calendar.open ~ * {
+    pointer-events: auto !important;
+}
