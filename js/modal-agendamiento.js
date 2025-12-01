@@ -1,30 +1,29 @@
 // modal-agendamiento.js - Sistema centralizado de agendamiento
-// Este archivo se comparte entre todas las páginas (corporate, agile, premium)
 
-// Variable global para mantener el plan seleccionado
-let currentSelectedPlan = '';
-
+// Abrir modal
 function openAppointmentModal(planName) {
-    currentSelectedPlan = planName;
     const modal = document.getElementById('appointmentModal');
+    const planInput = document.getElementById('selectedPlan');
     const planDisplay = document.getElementById('planDisplay');
-    const selectedPlanInput = document.getElementById('selectedPlan');
     
-    if (modal && planDisplay && selectedPlanInput) {
-        planDisplay.value = planName;
-        selectedPlanInput.value = planName;
+    if (modal && planInput && planDisplay) {
+        planInput.value = planName || 'Consulta General';
+        planDisplay.value = planName || 'Consulta General';
+        
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         
-        // FIX: Prevenir scroll del body pero mantener scroll del modal
+        // FIX: Bloquear scroll del body para evitar doble scroll
         document.body.style.overflow = 'hidden';
         document.body.style.position = 'fixed';
         document.body.style.width = '100%';
     }
 }
 
+// Cerrar modal
 function closeAppointmentModal() {
     const modal = document.getElementById('appointmentModal');
+    
     if (modal) {
         modal.classList.add('hidden');
         modal.classList.remove('flex');
@@ -61,9 +60,10 @@ function initializeFlatpickr() {
         locale: "es",
         minDate: minDate,
         dateFormat: "Y-m-d",
-        static: false, // Siempre popup
-        position: isMobile ? "above center" : "auto center", // FIX: Posición fija en mobile
-        appendTo: isMobile ? document.body : undefined, // FIX: Append a body en mobile
+        disableMobile: true, // CRITICAL: Force Flatpickr UI, disable native picker
+        static: isMobile, // Use static positioning on mobile to avoid calculation errors
+        position: isMobile ? "auto center" : "auto center",
+        appendTo: undefined, // Let Flatpickr handle appending (usually after input)
         inline: false,
         disable: [
             function(date) {
@@ -74,21 +74,6 @@ function initializeFlatpickr() {
             if (selectedDates.length > 0) {
                 document.getElementById('selectedDate').value = dateStr;
                 generateTimeSlots(selectedDates[0]);
-            }
-        },
-        onOpen: function() {
-            if (isMobile) {
-                // FIX: Posicionar calendario correctamente
-                setTimeout(() => {
-                    const calendar = document.querySelector('.flatpickr-calendar');
-                    if (calendar) {
-                        calendar.style.position = 'fixed';
-                        calendar.style.top = '50%';
-                        calendar.style.left = '50%';
-                        calendar.style.transform = 'translate(-50%, -50%)';
-                        calendar.style.zIndex = '100000';
-                    }
-                }, 10);
             }
         }
     });

@@ -11,15 +11,34 @@
    ========================================= */
 
 /* Orden de capas (de menor a mayor) */
-.particles { z-index: -1 !important; }
-.spotlight { z-index: 0 !important; }
-nav { z-index: 50 !important; }
-.loading-screen { z-index: 9998 !important; }
-#appointmentModal { z-index: 9999 !important; }
-.whatsapp-widget { z-index: 99999 !important; } /* SIEMPRE visible */
+.particles {
+    z-index: -1 !important;
+}
+
+.spotlight {
+    z-index: 0 !important;
+}
+
+nav {
+    z-index: 50 !important;
+}
+
+.loading-screen {
+    z-index: 9998 !important;
+}
+
+#appointmentModal {
+    z-index: 9999 !important;
+}
+
+.whatsapp-widget {
+    z-index: 99999 !important;
+}
+
+/* SIEMPRE visible */
 
 /* Asegurar que el modal no tape el widget */
-#appointmentModal.flex ~ .whatsapp-widget {
+#appointmentModal.flex~.whatsapp-widget {
     z-index: 99999 !important;
 }
 
@@ -45,11 +64,9 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 9999;
-    background: radial-gradient(
-        600px circle at var(--x, 50%) var(--y, 50%),
-        rgba(14, 165, 233, 0.15),
-        transparent 40%
-    );
+    background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%),
+            rgba(14, 165, 233, 0.15),
+            transparent 40%);
     opacity: 0;
     transition: opacity 0.5s ease;
 }
@@ -68,8 +85,15 @@ body:hover .spotlight {
 }
 
 @keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 /* GLASS MORPHISM AVANZADO */
@@ -119,22 +143,8 @@ body:hover .spotlight {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     transition: left 0.5s;
-}
-
-.btn-premium:hover::before {
-    left: 100%;
-}
-
-.btn-premium:hover {
-    transform: scale(1.05);
-    box-shadow: 0 20px 40px rgba(14, 165, 233, 0.4);
-}
-
-/* PARTÍCULAS DE FONDO */
-.particles {
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -153,10 +163,25 @@ body:hover .spotlight {
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+    }
 }
 
 /* SECCIONES */
@@ -181,7 +206,7 @@ body:hover .spotlight {
 .mockup-screen {
     transform: rotateY(-15deg) rotateX(5deg);
     transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    box-shadow: 
+    box-shadow:
         0 50px 100px -20px rgba(0, 0, 0, 0.5),
         0 30px 60px -30px rgba(14, 165, 233, 0.3);
 }
@@ -219,8 +244,17 @@ body:hover .spotlight {
 }
 
 @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.2); opacity: 0.8; }
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
 }
 
 /* COMPARADOR ANTES/DESPUÉS */
@@ -282,24 +316,29 @@ body:hover .spotlight {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-    .spotlight { display: none; }
-    
+    .spotlight {
+        display: none;
+    }
+
     /* Reduce blur for performance */
     .glass-ultra {
         backdrop-filter: blur(10px) saturate(180%);
     }
-    
+
     /* Adjust 3D mockup for mobile */
     .mockup-screen {
-        transform: none !important; /* Disable 3D rotation on mobile */
+        transform: none !important;
+        /* Disable 3D rotation on mobile */
         box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     }
-    
+
     .mockup-3d:hover .mockup-screen {
         transform: none !important;
     }
@@ -315,8 +354,15 @@ body:hover .spotlight {
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+    }
 }
 
 /* =========================================
@@ -344,7 +390,8 @@ body:hover .spotlight {
     padding: 8px 12px;
     border-radius: 8px;
     font-size: 0.85rem;
-    white-space: pre-wrap; /* Permite saltos de línea si es muy largo */
+    white-space: pre-wrap;
+    /* Permite saltos de línea si es muy largo */
     width: max-content;
     max-width: 250px;
     text-align: center;
@@ -353,7 +400,7 @@ body:hover .spotlight {
     transition: all 0.3s ease;
     pointer-events: none;
     z-index: 100;
-    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
 }
 
@@ -369,7 +416,8 @@ body:hover .spotlight {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    z-index: 99999 !important; /* MÁS ALTO que modal */
+    z-index: 99999 !important;
+    /* MÁS ALTO que modal */
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     pointer-events: auto !important;
 }
@@ -427,8 +475,15 @@ body:has(#appointmentModal.flex) .whatsapp-widget {
 }
 
 @keyframes ripple {
-    0% { transform: scale(0.8); opacity: 0.5; }
-    100% { transform: scale(1.5); opacity: 0; }
+    0% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }
 
 .whatsapp-widget:hover {
@@ -464,14 +519,14 @@ body:has(#appointmentModal.flex) .whatsapp-widget {
 
 /* FUTURE TECH CARDS */
 .tech-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.4s ease;
 }
 
 .tech-card:hover {
     border-color: var(--primary);
-    background: linear-gradient(180deg, rgba(14, 165, 233, 0.1) 0%, rgba(255,255,255,0.01) 100%);
+    background: linear-gradient(180deg, rgba(14, 165, 233, 0.1) 0%, rgba(255, 255, 255, 0.01) 100%);
 }
 
 /* =========================================
@@ -484,88 +539,130 @@ body:has(#appointmentModal.flex) .whatsapp-widget {
 }
 
 @keyframes gentleBreathe {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.002); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.002);
+    }
 }
 
 /* Mini Site Components with Animations */
-.mini-nav { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
+.mini-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 2rem;
     animation: slideDown 0.6s ease-out;
 }
 
 @keyframes slideDown {
-    from { transform: translateY(-10px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
-.mini-logo { 
-    height: 1.5rem; 
-    width: 6rem; 
-    background: currentColor; 
-    opacity: 0.9; 
+.mini-logo {
+    height: 1.5rem;
+    width: 6rem;
+    background: currentColor;
+    opacity: 0.9;
     border-radius: 4px;
     animation: shimmer 3s ease-in-out infinite;
 }
 
 @keyframes shimmer {
-    0%, 100% { opacity: 0.9; }
-    50% { opacity: 1; }
+
+    0%,
+    100% {
+        opacity: 0.9;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }
 
-.mini-links { display: flex; gap: 1rem; }
-.mini-link { 
-    height: 0.5rem; 
-    width: 3rem; 
-    background: currentColor; 
-    opacity: 0.6; 
+.mini-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.mini-link {
+    height: 0.5rem;
+    width: 3rem;
+    background: currentColor;
+    opacity: 0.6;
     border-radius: 2px;
     transition: all 0.3s ease;
 }
 
-.mini-link:hover { opacity: 1; transform: translateY(-1px); }
+.mini-link:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+}
 
-.mini-hero { 
+.mini-hero {
     margin-bottom: 3rem;
     animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
 @keyframes fadeInUp {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
-.mini-title { 
-    height: 2rem; 
-    width: 70%; 
-    background: currentColor; 
-    opacity: 0.95; 
-    border-radius: 4px; 
+.mini-title {
+    height: 2rem;
+    width: 70%;
+    background: currentColor;
+    opacity: 0.95;
+    border-radius: 4px;
     margin-bottom: 1rem;
     animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 0.95; }
-    50% { opacity: 1; }
+
+    0%,
+    100% {
+        opacity: 0.95;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }
 
-.mini-subtitle { 
-    height: 0.75rem; 
-    width: 50%; 
-    background: currentColor; 
-    opacity: 0.7; 
-    border-radius: 2px; 
+.mini-subtitle {
+    height: 0.75rem;
+    width: 50%;
+    background: currentColor;
+    opacity: 0.7;
+    border-radius: 2px;
     margin-bottom: 2rem;
 }
 
-.mini-btn { 
-    height: 2.5rem; 
-    width: 8rem; 
-    background: var(--primary); 
+.mini-btn {
+    height: 2.5rem;
+    width: 8rem;
+    background: var(--primary);
     border-radius: 99px;
     animation: floatBtn 3s ease-in-out infinite;
     box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
@@ -573,37 +670,69 @@ body:has(#appointmentModal.flex) .whatsapp-widget {
 }
 
 @keyframes floatBtn {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(14, 165, 233, 0.4); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(14, 165, 233, 0.4);
+    }
 }
 
-.mini-grid { 
-    display: grid; 
+.mini-grid {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem; 
+    gap: 1rem;
     padding-bottom: 2rem;
 }
 
-.mini-card { 
-    height: 8rem; 
-    border-radius: 0.75rem; 
-    padding: 1rem; 
-    position: relative; 
+.mini-card {
+    height: 8rem;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     animation: popIn 0.5s ease-out both;
 }
 
-.mini-card:nth-child(1) { animation-delay: 0.4s; }
-.mini-card:nth-child(2) { animation-delay: 0.5s; }
-.mini-card:nth-child(3) { animation-delay: 0.6s; }
-.mini-card:nth-child(4) { animation-delay: 0.7s; }
-.mini-card:nth-child(5) { animation-delay: 0.8s; }
-.mini-card:nth-child(6) { animation-delay: 0.9s; }
+.mini-card:nth-child(1) {
+    animation-delay: 0.4s;
+}
+
+.mini-card:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.mini-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.mini-card:nth-child(4) {
+    animation-delay: 0.7s;
+}
+
+.mini-card:nth-child(5) {
+    animation-delay: 0.8s;
+}
+
+.mini-card:nth-child(6) {
+    animation-delay: 0.9s;
+}
 
 @keyframes popIn {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .mini-card::before {
@@ -613,61 +742,81 @@ body:has(#appointmentModal.flex) .whatsapp-widget {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
     animation: slideShine 3s ease-in-out infinite;
 }
 
 @keyframes slideShine {
-    0% { left: -100%; }
-    50%, 100% { left: 100%; }
+    0% {
+        left: -100%;
+    }
+
+    50%,
+    100% {
+        left: 100%;
+    }
 }
 
-.mini-card.dark { 
-    background: rgba(255,255,255,0.12); 
-    border: 1px solid rgba(255,255,255,0.25);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.mini-card.dark {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.mini-card.light { 
-    background: rgba(0,0,0,0.06); 
-    border: 1px solid rgba(0,0,0,0.12);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+.mini-card.light {
+    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .mini-card:hover {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.mini-card-icon { 
-    width: 2.5rem; 
-    height: 2.5rem; 
-    background: var(--primary); 
-    border-radius: 50%; 
-    margin-bottom: 0.75rem; 
+.mini-card-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--primary);
+    border-radius: 50%;
+    margin-bottom: 0.75rem;
     opacity: 0.9;
     animation: rotateIcon 4s linear infinite;
     box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
 }
 
 @keyframes rotateIcon {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
-.mini-card-line { 
-    height: 0.5rem; 
-    width: 100%; 
-    background: currentColor; 
-    opacity: 0.5; 
-    border-radius: 3px; 
+.mini-card-line {
+    height: 0.5rem;
+    width: 100%;
+    background: currentColor;
+    opacity: 0.5;
+    border-radius: 3px;
     margin-bottom: 0.5rem;
     animation: expandLine 2s ease-out infinite;
 }
 
 @keyframes expandLine {
-    0%, 100% { width: 100%; opacity: 0.5; }
-    50% { width: 95%; opacity: 0.7; }
+
+    0%,
+    100% {
+        width: 100%;
+        opacity: 0.5;
+    }
+
+    50% {
+        width: 95%;
+        opacity: 0.7;
+    }
 }
 
 .mini-card-line:nth-child(3) {
@@ -682,743 +831,512 @@ body:has(#appointmentModal.flex) .whatsapp-widget {
     width: 16rem;
     background: white;
     border-radius: 1rem;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     z-index: 20;
     animation: popUpBounce 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1s both,
-               floatWidget 3s ease-in-out 2s infinite;
+        floatWidget 3s ease-in-out 2s infinite;
 }
 
 @keyframes popUpBounce {
-    0% { transform: translateY(100px) scale(0.5); opacity: 0; }
-    100% { transform: translateY(0) scale(1); opacity: 1; }
+    0% {
+        transform: translateY(100px) scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
 }
 
 @keyframes floatWidget {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
 }
 
-.mini-chat-header { 
+.mini-chat-header {
     background: linear-gradient(135deg, var(--secondary) 0%, #0ea5e9 100%);
-    padding: 0.75rem; 
-    display: flex; 
-    align-items: center; 
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
     gap: 0.5rem;
     animation: headerGlow 2s ease-in-out infinite;
 }
 
 @keyframes headerGlow {
-    0%, 100% { box-shadow: inset 0 0 0 rgba(255,255,255,0); }
-    50% { box-shadow: inset 0 -2px 10px rgba(255,255,255,0.2); }
+
+    0%,
+    100% {
+        box-shadow: inset 0 0 0 rgba(255, 255, 255, 0);
+    }
+
+    50% {
+        box-shadow: inset 0 -2px 10px rgba(255, 255, 255, 0.2);
+    }
 }
 
-.mini-chat-avatar { 
-    width: 1.5rem; 
-    height: 1.5rem; 
-    background: white; 
-    border-radius: 50%;
-    animation: avatarPulse 2s ease-in-out infinite;
-}
-
-@keyframes avatarPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); box-shadow: 0 0 10px rgba(255,255,255,0.5); }
-}
-
-.mini-chat-body { 
-    padding: 1rem; 
-    background: #f8fafc; 
-    height: auto; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 0.75rem;
-}
-
-.mini-msg { 
-    background: white; 
-    padding: 0.6rem; 
-    border-radius: 0.5rem; 
-    border-top-left-radius: 0; 
-    font-size: 0.7rem; 
-    color: #334155; 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    animation: slideInMsg 0.5s ease-out both;
-}
-
-.mini-msg:nth-child(1) { animation-delay: 2s; }
-.mini-msg:nth-child(2) { animation-delay: 2.5s; }
-
-@keyframes slideInMsg {
-    from { transform: translateX(-20px);  opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-/* =========================================
-}
-
-.mini-btn { 
-    height: 2.5rem; 
-    width: 8rem; 
-    background: var(--primary); 
-    border-radius: 99px;
-    animation: floatBtn 3s ease-in-out infinite;
-    box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
-    transition: all 0.3s ease;
-}
-
-@keyframes floatBtn {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(14, 165, 233, 0.4); }
-}
-
-.mini-grid { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem; 
-    padding-bottom: 2rem;
-}
-
-.mini-card { 
-    height: 8rem; 
-    border-radius: 0.75rem; 
-    padding: 1rem; 
-    position: relative; 
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    animation: popIn 0.5s ease-out both;
-}
-
-.mini-card:nth-child(1) { animation-delay: 0.4s; }
-.mini-card:nth-child(2) { animation-delay: 0.5s; }
-.mini-card:nth-child(3) { animation-delay: 0.6s; }
-.mini-card:nth-child(4) { animation-delay: 0.7s; }
-.mini-card:nth-child(5) { animation-delay: 0.8s; }
-.mini-card:nth-child(6) { animation-delay: 0.9s; }
-
-@keyframes popIn {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-.mini-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-    animation: slideShine 3s ease-in-out infinite;
-}
-
-@keyframes slideShine {
-    0% { left: -100%; }
-    50%, 100% { left: 100%; }
-}
-
-.mini-card.dark { 
-    background: rgba(255,255,255,0.12); 
-    border: 1px solid rgba(255,255,255,0.25);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.mini-card.light { 
-    background: rgba(0,0,0,0.06); 
-    border: 1px solid rgba(0,0,0,0.12);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.mini-card:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-.mini-card-icon { 
-    width: 2.5rem; 
-    height: 2.5rem; 
-    background: var(--primary); 
-    border-radius: 50%; 
-    margin-bottom: 0.75rem; 
-    opacity: 0.9;
-    animation: rotateIcon 4s linear infinite;
-    box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
-}
-
-@keyframes rotateIcon {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.mini-card-line { 
-    height: 0.5rem; 
-    width: 100%; 
-    background: currentColor; 
-    opacity: 0.5; 
-    border-radius: 3px; 
-    margin-bottom: 0.5rem;
-    animation: expandLine 2s ease-out infinite;
-}
-
-@keyframes expandLine {
-    0%, 100% { width: 100%; opacity: 0.5; }
-    50% { width: 95%; opacity: 0.7; }
-}
-
-.mini-card-line:nth-child(3) {
-    animation-delay: 0.3s;
-}
-
-/* Animated AI Widget */
-.mini-ai-widget {
-    position: absolute;
-    bottom: 2rem;
-    right: 2rem;
-    width: 16rem;
+.mini-chat-avatar {
+    width: 1.5rem;
+    height: 1.5rem;
     background: white;
-    border-radius: 1rem;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    overflow: hidden;
-    z-index: 20;
-    animation: popUpBounce 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1s both,
-               floatWidget 3s ease-in-out 2s infinite;
-}
-
-@keyframes popUpBounce {
-    0% { transform: translateY(100px) scale(0.5); opacity: 0; }
-    100% { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-@keyframes floatWidget {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-}
-
-.mini-chat-header { 
-    background: linear-gradient(135deg, var(--secondary) 0%, #0ea5e9 100%);
-    padding: 0.75rem; 
-    display: flex; 
-    align-items: center; 
-    gap: 0.5rem;
-    animation: headerGlow 2s ease-in-out infinite;
-}
-
-@keyframes headerGlow {
-    0%, 100% { box-shadow: inset 0 0 0 rgba(255,255,255,0); }
-    50% { box-shadow: inset 0 -2px 10px rgba(255,255,255,0.2); }
-}
-
-.mini-chat-avatar { 
-    width: 1.5rem; 
-    height: 1.5rem; 
-    background: white; 
     border-radius: 50%;
     animation: avatarPulse 2s ease-in-out infinite;
 }
 
 @keyframes avatarPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); box-shadow: 0 0 10px rgba(255,255,255,0.5); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
 }
 
-.mini-chat-body { 
-    padding: 1rem; 
-    background: #f8fafc; 
-    height: auto; 
-    display: flex; 
-    flex-direction: column; 
+.mini-chat-body {
+    padding: 1rem;
+    background: #f8fafc;
+    height: auto;
+    display: flex;
+    flex-direction: column;
     gap: 0.75rem;
 }
 
-.mini-msg { 
-    background: white; 
-    padding: 0.6rem; 
-    border-radius: 0.5rem; 
-    border-top-left-radius: 0; 
-    font-size: 0.7rem; 
-    color: #334155; 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+.mini-msg {
+    background: white;
+    padding: 0.6rem;
+    border-radius: 0.5rem;
+    border-top-left-radius: 0;
+    font-size: 0.7rem;
+    color: #334155;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     animation: slideInMsg 0.5s ease-out both;
 }
 
-.mini-msg:nth-child(1) { animation-delay: 2s; }
-.mini-msg:nth-child(2) { animation-delay: 2.5s; }
+.mini-msg:nth-child(1) {
+    animation-delay: 2s;
+}
+
+.mini-msg:nth-child(2) {
+    animation-delay: 2.5s;
+}
 
 @keyframes slideInMsg {
-    from { transform: translateX(-20px);  opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
 
-/* =========================================
-   MOBILE-FIRST OPTIMIZATIONS
-   ========================================= */
-
-/* Base Mobile Adjustments (Portrait Mobile) */
-@media (max-width: 767px) {
-    /* CRÍTICO: Modal Scroll Fix - Permite scroll completo */
-    #appointmentModal {
-        align-items: flex-start !important;
-        padding-top: 1rem !important;
-        padding-bottom: 1rem !important;
-        overflow-y: scroll !important;
-        -webkit-overflow-scrolling: touch !important;
-    }
-    
-    #appointmentModal > div {
-        margin-top: 1rem !important;
-        margin-bottom: 1rem !important;
-        max-height: none !important;
-        padding: 1rem !important;
-    }
-    
-    /* CRÍTICO: Prevenir zoom en iOS en inputs */
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    textarea,
-    select,
-    #datePicker {
-        font-size: 16px !important;
-        min-height: 44px !important;
-        padding: 0.75rem !important;
-    }
-    
-    /* CRÍTICO: Checkboxes accesibles WCAG 2.1 */
-    label:has(input[type="checkbox"]) {
-        min-height: 44px !important;
-        display: flex !important;
-        align-items: center !important;
-        padding: 0.5rem 0 !important;
-    }
-    
-    input[type="checkbox"] + div {
-        min-width: 24px !important;
-        min-height: 24px !important;
-    }
-    
-    /* CRÍTICO: Time Slots Grid Responsive */
-    #timeSlotsGrid {
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 0.5rem !important;
-    }
-    
-    .time-slot {
-        padding: 0.625rem 0.5rem !important;
-        font-size: 0.75rem !important;
-        min-height: 44px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-    
-    /* Botones táctiles */
-    button[type="submit"],
-    .btn-premium {
-        min-height: 48px !important;
-        font-size: 1rem !important;
-        padding: 1rem !important;
-    }
-    
-    /* Hero Sections - Reducir padding vertical */
-    .min-h-screen {
-        min-height: auto !important;
-        padding-top: 5rem !important;
-        padding-bottom: 2rem !important;
-    }
-    
-    section.min-h-screen {
-        padding-top: 5rem !important;
-    }
-    
-    /* PERFORMANCE: Deshabilitar efectos pesados */
-    .spotlight {
-        display: none !important;
-    }
-    
-    .mockup-screen {
-        transform: none !important;
-        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5) !important;
-    }
-    
-    .mockup-screen:hover {
-        transform: none !important;
-    }
-    
-    .glass-ultra {
-        backdrop-filter: blur(10px) saturate(150%) !important;
-    }
-    
-    /* Tooltips deshabilitados en mobile */
-    .tech-term::after {
-        display: none !important;
-    }
-    
-    /* WhatsApp Widget posición mobile */
-    .whatsapp-widget {
-        bottom: 20px !important;
-        right: 20px !important;
-    }
-    
-    .whatsapp-btn {
-        width: 56px !important;
-        height: 56px !important;
-        font-size: 28px !important;
-    }
-    
-    /* Tipografía responsive */
-    h1 {
-        font-size: 2rem !important;
-        line-height: 1.2 !important;
-    }
-    
-    h2 {
-        font-size: 1.75rem !important;
-    }
-    
-    h3 {
-        font-size: 1.5rem !important;
-    }
-    
-    /* Navegación mobile */
-    nav {
-        padding: 0.75rem 1rem !important;
-    }
-    
-    /* Grids forzar single column */
-    .grid.md\:grid-cols-2,
-    .grid.lg\:grid-cols-2,
-    .grid.md\:grid-cols-3,
-    .grid.lg\:grid-cols-3 {
-        grid-template-columns: 1fr !important;
-    }
-    
-    /* Reducir espacio en formulario */
-    #appointmentForm .space-y-5 > * + * {
-        margin-top: 1rem !important;
-    }
-    
-    /* Social links táctiles */
-    .social-link {
-        width: 44px !important;
-        height: 44px !important;
-    }
-    
-    /* Close button del modal */
-    #appointmentModal button[onclick*="close"] {
-        width: 44px !important;
-        height: 44px !important;
-        top: 0.5rem !important;
-        right: 0.5rem !important;
+    to {
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 
-/* Tablet Adjustments (768px - 1023px) */
-@media (min-width: 768px) and (max-width: 1023px) {
-    #timeSlotsGrid {
-        grid-template-columns: repeat(4, 1fr) !important;
-    }
-    
-    #appointmentModal > div {
-        padding: 2rem !important;
-    }
-    
-    h1 {
-        font-size: 2.5rem !important;
-    }
+
+grid-template-columns: 1fr !important;
+gap: 1rem !important;
 }
 
-/* Landscape Mobile (Small Height) */
-@media (max-width: 767px) and (orientation: landscape) {
-    #appointmentModal > div {
-        max-height: calc(100vh - 1rem) !important;
-        margin-top: 0.5rem !important;
-        margin-bottom: 0.5rem !important;
-    }
-    
-    .min-h-screen,
-    section.min-h-screen {
-        min-height: auto !important;
-        padding-top: 3rem !important;
-        padding-bottom: 2rem !important;
-    }
-    
-    .space-y-6 > * + * {
-        margin-top: 1rem !important;
-    }
+#appointmentForm .md\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
 }
 
-/* Extra Small Mobile (320px - 374px) */
-@media (max-width: 374px) {
-    #appointmentModal > div {
-        padding: 0.75rem !important;
-    }
-    
-    h3 {
-        font-size: 1.25rem !important;
-    }
-    
-    .time-slot {
-        font-size: 0.7rem !important;
-        padding: 0.5rem 0.25rem !important;
-    }
-    
-    .btn-premium {
-        font-size: 0.9rem !important;
-    }
+/* CRÍTICO: Inputs Full Width */
+#appointmentForm input,
+#appointmentForm textarea,
+#appointmentForm select {
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
-/* =========================================
-   FIX CRÍTICO FORMULARIO MOBILE
-   ========================================= */
-@media (max-width: 767px) {
-    
-    /* CRÍTICO: Fix Grid Layouts en Formulario */
-    #appointmentForm .grid {
-        grid-template-columns: 1fr !important;
-        gap: 1rem !important;
-    }
-    
-    #appointmentForm .md\:grid-cols-2 {
-        grid-template-columns: 1fr !important;
-    }
-    
-    /* CRÍTICO: Inputs Full Width */
-    #appointmentForm input,
-    #appointmentForm textarea,
-    #appointmentForm select {
-        width: 100% !important;
-        box-sizing: border-box !important;
-    }
-    
-    /* CRÍTICO: Labels con espacio adecuado */
-    #appointmentForm label {
-        display: block !important;
-        width: 100% !important;
-        margin-bottom: 0.5rem !important;
-    }
-    
-    /* CRÍTICO: Radio buttons (Tipo de Reunión) */
-    #appointmentForm .grid.grid-cols-2 {
-        grid-template-columns: 1fr !important;
-        gap: 0.75rem !important;
-    }
-    
-    #appointmentForm input[type="radio"] + div {
-        padding: 1rem !important;
-        text-align: center !important;
-    }
-    
-    /* CRÍTICO: Checkboxes área completa */
-    #appointmentForm label:has(input[type="checkbox"]) {
-        display: flex !important;
-        align-items: flex-start !important;
-        gap: 0.75rem !important;
-        padding: 0.75rem !important;
-        min-height: 56px !important;
-        width: 100% !important;
-    }
-    
-    #appointmentForm label:has(input[type="checkbox"]) > div {
-        flex-shrink: 0 !important;
-    }
-    
-    #appointmentForm label:has(input[type="checkbox"]) > span {
-        flex: 1 !important;
-        padding-top: 0.25rem !important;
-    }
-    
-    /* CRÍTICO: Contenedor de Términos */
-    #appointmentForm .space-y-4,
-    #appointmentForm .space-y-3 {
-        width: 100% !important;
-        padding: 1rem !important;
-    }
-    
-    /* CRÍTICO: Botón Submit Full Width */
-    #appointmentForm button[type="submit"] {
-        width: 100% !important;
-        margin-top: 1.5rem !important;
-    }
-    
-    /* CRÍTICO: Plan Display Input */
-    #planDisplay {
-        width: 100% !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-    
-    /* CRÍTICO: Textarea altura adecuada */
-    #appointmentForm textarea {
-        min-height: 80px !important;
-    }
-    
-    /* CRÍTICO: Eliminar padding/margin conflictivo */
-    #appointmentForm > * {
-        max-width: 100% !important;
-    }
-    
-    /* CRÍTICO: Container del modal más ancho */
-    #appointmentModal > div {
-        width: calc(100vw - 1rem) !important;
-        max-width: calc(100vw - 1rem) !important;
-        padding: 1rem !important;
-        margin: 0.5rem !important;
-    }
-    
-    /* CRÍTICO: Header del modal */
-    #appointmentModal h3 {
-        font-size: 1.5rem !important;
-        margin-bottom: 0.5rem !important;
-        padding-right: 3rem !important; /* Espacio para botón cerrar */
-    }
-    
-    /* CRÍTICO: Espaciado entre campos */
-    #appointmentForm .space-y-5 > *:not(:first-child) {
-        margin-top: 1rem !important;
-    }
+/* CRÍTICO: Labels con espacio adecuado */
+#appointmentForm label {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 0.5rem !important;
 }
 
-/* FIX para grids de propuestas */
-@media (max-width: 767px) {
-    .mobile-optimized-grid {
-        grid-template-columns: 1fr !important;
-        gap: 2rem !important;
-        padding: 0 !important;
-    }
-    
-    .mobile-optimized-grid > div {
-        width: 100% !important;
-        max-width: 100% !important;
-    }
+/* CRÍTICO: Radio buttons (Tipo de Reunión) */
+#appointmentForm .grid.grid-cols-2 {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
 }
 
-@media (max-width: 767px) {
-    /* CRÍTICO: Prevenir overflow hidden que oculta elementos */
-    /* CRÍTICO: Prevenir overflow hidden que oculta elementos */
-    body,
-    html {
-        overflow-x: hidden !important;
-        overflow-y: auto !important;
-        width: 100% !important;
-        position: relative !important;
-    }
-
-    main,
-    section {
-        overflow-x: hidden !important;
-        overflow-y: visible !important;
-    }
-    
-    /* FIX: Usar dvh (dynamic viewport height) para evitar saltos con la barra de dirección */
-    .min-h-screen {
-        min-height: 100dvh !important;
-    }
-    
-    /* CRÍTICO: Modal debe permitir scroll */
-    #appointmentModal {
-        overflow-y: scroll !important;
-        overflow-x: hidden !important;
-    }
-    
-    /* CRÍTICO: Containers no deben ocultar contenido */
-    .max-w-7xl,
-    .max-w-4xl,
-    .max-w-3xl {
-        overflow: visible !important;
-    }
-    
-    /* CRÍTICO: Glass cards no deben desbordar */
-    .glass-ultra {
-        overflow: visible !important;
-    }
+#appointmentForm input[type="radio"]+div {
+    padding: 1rem !important;
+    text-align: center !important;
 }
 
-@media (max-width: 767px) {
-    /* CRÍTICO: Mockups responsivos */
-    .mockup-3d,
-    .mockup-screen {
-        max-width: 100% !important;
-        overflow: hidden !important;
-    }
-    
-    .mockup-screen {
-        height: auto !important;
-        min-height: 400px !important;
-        max-height: 500px !important;
-    }
-    
-    /* CRÍTICO: Mockup content debe ajustarse */
-    .mockup-content {
-        padding: 0.5rem !important;
-        overflow: hidden !important;
-    }
-    
-    /* CRÍTICO: Mini elementos en mockup */
-    .mini-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.5rem !important;
-    }
-    
-    .mini-card {
-        padding: 0.5rem !important;
-        min-height: auto !important;
-    }
-    
-    /* CRÍTICO: Premium mockup (más complejo) */
-    .mockup-screen .grid-cols-4 {
-        grid-template-columns: 1fr !important;
-    }
+/* CRÍTICO: Checkboxes área completa */
+#appointmentForm label:has(input[type="checkbox"]) {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+    padding: 0.75rem !important;
+    min-height: 56px !important;
+    width: 100% !important;
 }
 
-/* =========================================
-   FIX VISUAL FINAL (User Feedback)
-   ========================================= */
-
-/* 1. Ocultar WhatsApp cuando el modal está abierto para evitar conflictos */
-#appointmentModal.flex ~ .whatsapp-widget,
-body:has(#appointmentModal.flex) .whatsapp-widget {
-    display: none !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
+#appointmentForm label:has(input[type="checkbox"])>div {
+    flex-shrink: 0 !important;
 }
 
-/* 2. Mejorar márgenes globales en móvil */
-@media (max-width: 767px) {
-    section {
-        padding-left: 1.5rem !important;
-        padding-right: 1.5rem !important;
-        padding-top: 8rem !important; /* FIX: Más espacio superior para el navbar fijo */
-        padding-bottom: 4rem !important; /* FIX: Más espacio inferior */
+#appointmentForm label:has(input[type="checkbox"])>span {
+    flex: 1 !important;
+    padding-top: 0.25rem !important;
+}
+
+/* CRÍTICO: Contenedor de Términos */
+#appointmentForm .space-y-4,
+#appointmentForm .space-y-3 {
+    width: 100% !important;
+    padding: 1rem !important;
+}
+
+/* CRÍTICO: Botón Submit Full Width */
+#appointmentForm button[type="submit"] {
+    width: 100% !important;
+    margin-top: 1.5rem !important;
+}
+
+/* CRÍTICO: Plan Display Input */
+#planDisplay {
+    width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* CRÍTICO: Textarea altura adecuada */
+#appointmentForm textarea {
+    min-height: 80px !important;
+}
+
+/* CRÍTICO: Eliminar padding/margin conflictivo */
+#appointmentForm>* {
+    max-width: 100% !important;
+}
+
+/* CRÍTICO: Container del modal más ancho */
+#appointmentModal>div {
+    width: calc(100vw - 1rem) !important;
+    max-width: calc(100vw - 1rem) !important;
+
+    @media (max-width: 767px) {
+        .mobile-optimized-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+            padding: 0 !important;
+        }
+
+        .mobile-optimized-grid>div {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
     }
-    
-    .max-w-7xl {
-        padding-left: 0.5rem !important;
-        padding-right: 0.5rem !important;
+
+    @media (max-width: 767px) {
+
+        /* CRÍTICO: Prevenir overflow hidden que oculta elementos */
+        /* CRÍTICO: Prevenir overflow hidden que oculta elementos */
+        body,
+        html {
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
+            width: 100% !important;
+            position: relative !important;
+        }
+
+        main,
+        section {
+            overflow-x: hidden !important;
+            overflow-y: visible !important;
+        }
+
+        /* FIX: Usar dvh (dynamic viewport height) para evitar saltos con la barra de dirección */
+        .min-h-screen {
+            min-height: 100dvh !important;
+        }
+
+        /* CRÍTICO: Modal debe permitir scroll */
+        #appointmentModal {
+            overflow-y: scroll !important;
+            overflow-x: hidden !important;
+        }
+
+        /* CRÍTICO: Containers no deben ocultar contenido */
+        .max-w-7xl,
+        .max-w-4xl,
+        .max-w-3xl {
+            overflow: visible !important;
+        }
+
+        /* CRÍTICO: Glass cards no deben desbordar */
+        .glass-ultra {
+            overflow: visible !important;
+        }
     }
-    
+
     /* Más aire en el modal */
-    #appointmentModal > div {
+    #appointmentModal>div {
         padding: 1.5rem !important;
         width: calc(100% - 2rem) !important;
         margin: 1rem auto !important;
     }
-    
+
     /* Inputs más altos y elegantes */
     #appointmentForm input,
     #appointmentForm select,
     #appointmentForm textarea {
         padding-top: 1rem !important;
         padding-bottom: 1rem !important;
-        font-size: 16px !important; /* Prevenir zoom iOS */
+        font-size: 16px !important;
+        /* Prevenir zoom iOS */
     }
-    
+
     /* Títulos de sección más pequeños para que no corten */
     h1 {
         font-size: 2.5rem !important;
         line-height: 1.1 !important;
     }
-    
+
     h2 {
         font-size: 2rem !important;
+    }
+
+    /* FIX CRÍTICO: Forzar visibilidad de elementos animados */
+    .animate-fade-in-left,
+    .animate-fade-in-right,
+    .animate-fade-in-up,
+    .animate-fade-in {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+}
+}
+
+@keyframes slideInMsg {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+grid-template-columns: 1fr !important;
+gap: 1rem !important;
+}
+
+#appointmentForm .md\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+}
+
+/* CRÍTICO: Inputs Full Width */
+#appointmentForm input,
+#appointmentForm textarea,
+#appointmentForm select {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* CRÍTICO: Labels con espacio adecuado */
+#appointmentForm label {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* CRÍTICO: Radio buttons (Tipo de Reunión) */
+#appointmentForm .grid.grid-cols-2 {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+}
+
+#appointmentForm input[type="radio"]+div {
+    padding: 1rem !important;
+    text-align: center !important;
+}
+
+/* CRÍTICO: Checkboxes área completa */
+#appointmentForm label:has(input[type="checkbox"]) {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+    padding: 0.75rem !important;
+    min-height: 56px !important;
+    width: 100% !important;
+}
+
+#appointmentForm label:has(input[type="checkbox"])>div {
+    flex-shrink: 0 !important;
+}
+
+#appointmentForm label:has(input[type="checkbox"])>span {
+    flex: 1 !important;
+    padding-top: 0.25rem !important;
+}
+
+/* CRÍTICO: Contenedor de Términos */
+#appointmentForm .space-y-4,
+#appointmentForm .space-y-3 {
+    width: 100% !important;
+    padding: 1rem !important;
+}
+
+/* CRÍTICO: Botón Submit Full Width */
+#appointmentForm button[type="submit"] {
+    width: 100% !important;
+    margin-top: 1.5rem !important;
+}
+
+/* CRÍTICO: Plan Display Input */
+#planDisplay {
+    width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* CRÍTICO: Textarea altura adecuada */
+#appointmentForm textarea {
+    min-height: 80px !important;
+}
+
+/* CRÍTICO: Eliminar padding/margin conflictivo */
+#appointmentForm>* {
+    max-width: 100% !important;
+}
+
+/* CRÍTICO: Container del modal más ancho */
+#appointmentModal>div {
+    width: calc(100vw - 1rem) !important;
+    max-width: calc(100vw - 1rem) !important;
+
+    @media (max-width: 767px) {
+        .mobile-optimized-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+            padding: 0 !important;
+        }
+
+        .mobile-optimized-grid>div {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+    }
+
+    @media (max-width: 767px) {
+
+        /* CRÍTICO: Prevenir overflow hidden que oculta elementos */
+        /* CRÍTICO: Prevenir overflow hidden que oculta elementos */
+        body,
+        html {
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
+            width: 100% !important;
+            position: relative !important;
+        }
+
+        main,
+        section {
+            overflow-x: hidden !important;
+            overflow-y: visible !important;
+        }
+
+        /* FIX: Usar dvh (dynamic viewport height) para evitar saltos con la barra de dirección */
+        .min-h-screen {
+            min-height: 100dvh !important;
+        }
+
+        /* CRÍTICO: Modal debe permitir scroll */
+        #appointmentModal {
+            overflow-y: scroll !important;
+            overflow-x: hidden !important;
+        }
+
+        /* CRÍTICO: Containers no deben ocultar contenido */
+        .max-w-7xl,
+        .max-w-4xl,
+        .max-w-3xl {
+            overflow: visible !important;
+        }
+
+        /* CRÍTICO: Glass cards no deben desbordar */
+        .glass-ultra {
+            overflow: visible !important;
+        }
+    }
+
+    /* Más aire en el modal */
+    #appointmentModal>div {
+        padding: 1.5rem !important;
+        width: calc(100% - 2rem) !important;
+        margin: 1rem auto !important;
+    }
+
+    /* Inputs más altos y elegantes */
+    #appointmentForm input,
+    #appointmentForm select,
+    #appointmentForm textarea {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+        font-size: 16px !important;
+        /* Prevenir zoom iOS */
+    }
+
+    /* Títulos de sección más pequeños para que no corten */
+    h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.1 !important;
+    }
+
+    h2 {
+        font-size: 2rem !important;
+    }
+
+    /* FIX CRÍTICO: Forzar visibilidad de elementos animados */
+    .animate-fade-in-left,
+    .animate-fade-in-right,
+    .animate-fade-in-up,
+    .animate-fade-in {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+}
+
+/* =========================================
+   HOMEPAGE SPECIFIC FIXES
+   ========================================= */
+
+/* Desktop Padding */
+@media (min-width: 768px) {
+    .home-hero {
+        padding-top: 10rem !important;
+        /* Balanced: 10rem */
+    }
+}
+
+/* Mobile Padding */
+@media (max-width: 767px) {
+    .home-hero {
+        padding-top: 8rem !important;
+        /* Balanced: 8rem */
     }
 }
